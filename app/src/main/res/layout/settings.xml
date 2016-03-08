@@ -14,12 +14,13 @@
         />
 
     <TextView
+        android:id="@+id/textAbout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="SIMPLE"
         android:textSize="30dp"
-        android:id="@+id/textAbout"
+
         android:layout_below="@+id/buttonAbout"
         android:textStyle="italic"
         android:textColor="#000000" />

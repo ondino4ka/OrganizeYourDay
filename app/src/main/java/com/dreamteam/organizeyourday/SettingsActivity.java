@@ -1,13 +1,10 @@
 package com.dreamteam.organizeyourday;
 
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
-/**
- * Created by AXE607 on 08.03.2016.
- */
 public class SettingsActivity extends AppCompatActivity{
 
     @Override
@@ -17,10 +14,9 @@ public class SettingsActivity extends AppCompatActivity{
 
     }
 
+    public void setTextAbout(View view) {
 
-    public void setTextAbout()
-    {
-        final TextView aboutText = (TextView) findViewById(R.id.textAbout);
+        TextView aboutText = (TextView)findViewById(R.id.textAbout);
         aboutText.setText("Это прога просто 10/10");
 
     }
