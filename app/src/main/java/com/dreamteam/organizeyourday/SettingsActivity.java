@@ -1,32 +1,24 @@
 package com.dreamteam.organizeyourday;
 
-import android.app.Activity;
+
 import android.os.Bundle;
-import android.content.Intent;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 /**
  * Created by AXE607 on 08.03.2016.
  */
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends AppCompatActivity{
 
-    void OnCreate(Bundle settings) {
-       super.onCreate(settings);
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-        Button aboutButton = (Button) findViewById(R.id.buttonAbout);
-        TextView aboutText = (TextView) findViewById(R.id.textAbout);
-
-
-        //final Button buttonAbout = (Button) findViewById(R.id.buttonAbout);
-        //final TextView aboutText = (TextView) findViewById(R.id.textAbout);
 
     }
 
 
-    public void SetTextAbout()
+    public void setTextAbout()
     {
         final TextView aboutText = (TextView) findViewById(R.id.textAbout);
         aboutText.setText("Это прога просто 10/10");
