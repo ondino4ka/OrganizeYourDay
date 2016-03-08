@@ -58,10 +58,4 @@ public class MainActivity extends AppCompatActivity {
                 .build();
     }
 
-    public void toSettings(View view)
-    {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-
-    }
 }

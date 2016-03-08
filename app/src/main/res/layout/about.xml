@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dreamteam.organizeyourday.AboutActivity"
+    android:id="@+id/aboutLayout">
+    <Button
+        android:id="@+id/buttonAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About"
+        android:onClick="setTextAbout"
+        />
+
+    <TextView
+        android:id="@+id/textAbout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="SIMPLE"
+        android:textSize="30dp"
+
+        android:layout_below="@+id/buttonAbout"
+        android:textStyle="italic"
+        android:textColor="#000000" />
+</RelativeLayout>
