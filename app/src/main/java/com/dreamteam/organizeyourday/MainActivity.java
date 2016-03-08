@@ -6,16 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.EditText;
 
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -35,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void renderNavigationDrawer(Toolbar toolbar){
+    public void renderNavigationDrawer(Toolbar toolbar) {
 
         AccountHeader account = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -45,17 +43,27 @@ public class MainActivity extends AppCompatActivity {
                 .withHeaderBackground(R.drawable.head_wallpaper)
                 .build();
 
+        final PrimaryDrawerItem item1 =  new PrimaryDrawerItem().withName(R.string.nav_bar_home);
+        final SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName(R.string.nav_bar_settings);
         Drawer result = new DrawerBuilder()
                 .withAccountHeader(account)
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.nav_bar_home),
-                        new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withName(R.string.nav_bar_settings)
-                )
-                .build();
+                      item1, item2
+                ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        if (drawerItem == item2){
+                            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                            startActivity(intent);
+                        }
+                        return false;
+                    }
+                })
+
+              .build();
     }
 
 }
