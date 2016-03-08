@@ -45,19 +45,25 @@ public class MainActivity extends AppCompatActivity {
 
         final PrimaryDrawerItem item1 =  new PrimaryDrawerItem().withName(R.string.nav_bar_home);
         final SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName(R.string.nav_bar_settings);
+        final SecondaryDrawerItem item3 = new SecondaryDrawerItem().withName(R.string.nav_bar_about);
+
         Drawer result = new DrawerBuilder()
                 .withAccountHeader(account)
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
-                      item1, item2
+                        item1, item2, item3
                 ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if (drawerItem == item2){
+                        if (drawerItem == item2) {
                             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                             startActivity(intent);
+                        }
+                        else if (drawerItem == item3) {
+                            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+                            startActivity((intent));
                         }
                         return false;
                     }

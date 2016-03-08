@@ -15,7 +15,7 @@ public class AboutActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
+        setContentView(R.layout.about);
 
 
 
@@ -24,7 +24,7 @@ public class AboutActivity extends AppCompatActivity{
     public void setTextAbout(View view) {
 
         TextView aboutText = (TextView)findViewById(R.id.textAbout);
-        RelativeLayout relativeLayout =(RelativeLayout) findViewById(R.id.settingsLayout);
+        RelativeLayout relativeLayout =(RelativeLayout) findViewById(R.id.aboutLayout);
 
         aboutText.setText("Это прога просто " + count + "/10");
         if(count>=10)
