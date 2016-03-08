@@ -16,19 +16,9 @@ public class SettingsActivity extends Activity {
 
         setContentView(R.layout.settings);
 
-
-        //Мой говнокод
         final Button buttonAbout = (Button) findViewById(R.id.buttonAbout);
         final TextView aboutText = (TextView) findViewById(R.id.textAbout);
-/*
-        buttonAbout.setOnClickListener(new View.OnClickListener() {
-                                           public void OnClick(View v) {
-                                               aboutText.setText("Это прога просто 10/10");
-                                           }
 
-                                       }
-        );
-*/
     }
 
 
