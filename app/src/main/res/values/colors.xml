@@ -6,4 +6,7 @@
 
     <color name="colorNavigationBar">#009688</color>
     <color name="colorBackground">#ffffff</color>
+
+    <color name="colorFabNormal">#009688</color>
+    <color name="colorFabPressed">#00897b</color>
 </resources>
