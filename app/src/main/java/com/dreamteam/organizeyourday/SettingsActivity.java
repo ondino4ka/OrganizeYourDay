@@ -2,6 +2,7 @@ package com.dreamteam.organizeyourday;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,9 +16,12 @@ public class SettingsActivity extends Activity {
        super.onCreate(settings);
 
         setContentView(R.layout.settings);
+        Button aboutButton = (Button) findViewById(R.id.buttonAbout);
+        TextView aboutText = (TextView) findViewById(R.id.textAbout);
 
-        final Button buttonAbout = (Button) findViewById(R.id.buttonAbout);
-        final TextView aboutText = (TextView) findViewById(R.id.textAbout);
+
+        //final Button buttonAbout = (Button) findViewById(R.id.buttonAbout);
+        //final TextView aboutText = (TextView) findViewById(R.id.textAbout);
 
     }
 
