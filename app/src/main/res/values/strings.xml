@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Organize Your Day</string>
+    <string name="nav_bar_home">Home</string>
+    <string name="nav_bar_settings">Settings</string>
 </resources>
