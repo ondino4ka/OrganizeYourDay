@@ -4,7 +4,8 @@
     android:background="@color/colorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dreamteam.organizeyourday.SettindsActivity">
+    tools:context="com.dreamteam.organizeyourday.SettindsActivity"
+    android:id="@+id/settingsLayout">
     <Button
         android:id="@+id/buttonAbout"
         android:layout_width="match_parent"
