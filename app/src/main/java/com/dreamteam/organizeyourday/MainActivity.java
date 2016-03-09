@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         generateToolbar();
-        generateNavigationDrawer(toolbar);
+        generateNavigationDrawer();
     }
 
     private void generateToolbar() {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void generateNavigationDrawer(Toolbar toolbar) {
+    private void generateNavigationDrawer() {
 
         final PrimaryDrawerItem homeButton =  new PrimaryDrawerItem()
                 .withName(R.string.nav_bar_home)
@@ -68,11 +68,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if (drawerItem.equals(settingsButton)){
-
                             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                             startActivity(intent);
                         }
-                        else if (drawerItem.equals(aboutButton)) {
+                        if (drawerItem.equals(aboutButton)) {
                             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
                             startActivity((intent));
                         }

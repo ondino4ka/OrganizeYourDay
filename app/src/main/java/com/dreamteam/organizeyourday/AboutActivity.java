@@ -6,9 +6,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-/**
- * Created by AXE607 on 08.03.2016.
- */
 public class AboutActivity extends AppCompatActivity{
 
     private int count = 0;
@@ -16,8 +13,6 @@ public class AboutActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
-
-
 
     }
 
