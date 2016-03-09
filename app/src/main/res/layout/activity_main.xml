@@ -10,20 +10,16 @@
     <include android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+    <com.getbase.floatingactionbutton.AddFloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-
-        fab:fab_addButtonColorNormal="@color/colorFabNormal"
-        fab:fab_addButtonColorPressed="@color/colorFabPressed">
-<com.getbase.floatingactionbutton.FloatingActionButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:onClick="toSettings"
-    />
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        fab:fab_colorNormal="@color/colorFabNormal"
+        fab:fab_colorPressed="@color/colorFabPressed"
+        />
 
 </RelativeLayout>
