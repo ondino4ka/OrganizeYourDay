@@ -20,6 +20,7 @@
         android:layout_marginRight="8dp"
         fab:fab_colorNormal="@color/colorFabNormal"
         fab:fab_colorPressed="@color/colorFabPressed"
+        android:onClick="addCard"
         />
 
 </RelativeLayout>

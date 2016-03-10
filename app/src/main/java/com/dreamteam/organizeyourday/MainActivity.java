@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         if(toolbar != null){
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         }
     }
 
@@ -47,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
         final SecondaryDrawerItem settingsButton = new SecondaryDrawerItem()
                 .withName(R.string.nav_bar_settings)
                 .withIcon(R.drawable.ic_build_black_24dp);
-        final SecondaryDrawerItem item3 = new SecondaryDrawerItem()
+        final SecondaryDrawerItem aboutButton = new SecondaryDrawerItem()
                 .withName(R.string.nav_bar_about)
                 .withIcon(R.drawable.ic_feedback_black_24dp);
-        final  DividerDrawerItem aboutButton = new DividerDrawerItem();
+        final  DividerDrawerItem devider = new DividerDrawerItem();
 
         AccountHeader account = accountHeader();
 
@@ -61,17 +62,16 @@ public class MainActivity extends AppCompatActivity {
                 .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
                         homeButton,
-                        aboutButton,
+                        devider,
                         settingsButton,
-                        item3
+                        aboutButton
                 ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if (drawerItem.equals(settingsButton)){
                             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                             startActivity(intent);
-                        }
-                        if (drawerItem.equals(aboutButton)) {
+                        }else if (drawerItem.equals(aboutButton)) {
                             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
                             startActivity((intent));
                         }
@@ -95,5 +95,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void addCard(View view){
+        Intent intent = new Intent(this,EditCardActivity.class);
+        startActivity(intent);
+    }
 
 }

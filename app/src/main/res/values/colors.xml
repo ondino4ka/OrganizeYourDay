@@ -9,4 +9,5 @@
 
     <color name="colorFabNormal">#009688</color>
     <color name="colorFabPressed">#00897b</color>
+    <color name="colorButton">#e0e0e0</color>
 </resources>

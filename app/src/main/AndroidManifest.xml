@@ -15,14 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity"
-            android:label="Settings">
-
-        </activity>
-        <activity android:name=".AboutActivity"
-            android:label="About">
-
-        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="Settings"></activity>
+        <activity
+            android:name=".AboutActivity"
+            android:label="About"></activity>
+        <activity android:name=".EditCardActivity"></activity>
     </application>
 
 </manifest>
