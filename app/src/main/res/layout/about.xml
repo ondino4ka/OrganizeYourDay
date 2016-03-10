@@ -17,12 +17,24 @@
     <TextView
         android:id="@+id/textAbout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="SIMPLE"
-        android:textSize="30dp"
-
-        android:layout_below="@+id/buttonAbout"
+        android:text="      Organize Your Day\n  Copyright© 2016 Plexiform"
+        android:textSize="18dp"
         android:textStyle="italic"
-        android:textColor="#000000" />
+        android:textColor="#616161"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textRepository"
+        android:textSize="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:onClick="jumpToRepository"
+        android:layout_below="@+id/buttonAbout"
+        android:layout_centerHorizontal="true"
+        android:textColor="#304FFE"
+        android:textStyle="italic" />
 </RelativeLayout>
