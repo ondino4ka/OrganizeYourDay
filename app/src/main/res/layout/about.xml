@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorBackground"
+    android:background="@color/md_grey_200"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.dreamteam.organizeyourday.AboutActivity"
     android:id="@+id/aboutLayout">
+
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
     <Button
         android:id="@+id/buttonAbout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="About"
+        android:background="@color/md_grey_200"
         android:onClick="setTextAbout"
-        />
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/textAbout"
@@ -33,8 +39,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:onClick="jumpToRepository"
-        android:layout_below="@+id/buttonAbout"
-        android:layout_centerHorizontal="true"
         android:textColor="#304FFE"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:layout_below="@+id/buttonAbout"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
