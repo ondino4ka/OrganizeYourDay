@@ -19,14 +19,14 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 
 public class SettingsActivity extends AppCompatActivity{
-    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+
 
 
 

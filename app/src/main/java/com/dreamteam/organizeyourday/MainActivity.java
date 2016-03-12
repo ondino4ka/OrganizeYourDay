@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity
 
     FragmentShare share;
     FragmentHome home;
+    FragmentHome home1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +51,17 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        // In case this activity was started with special instructions from an
+        // Intent, pass the Intent's extras to the fragment as arguments
+
+
+
         share =  new FragmentShare();
         home = new FragmentHome();
+        FragmentTransaction ft = getFragmentManager().beginTransaction().add(R.id.container,home);
+        ft.commit();
     }
 
     @Override
@@ -87,6 +97,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         FragmentTransaction ftrans= getFragmentManager().beginTransaction();
         if (id == R.id.home) {
+
            ftrans.replace(R.id.container, home);
         } else if (id == R.id.about) {
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
