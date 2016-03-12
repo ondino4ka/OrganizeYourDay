@@ -53,11 +53,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        // In case this activity was started with special instructions from an
-        // Intent, pass the Intent's extras to the fragment as arguments
-
-
-
         share =  new FragmentShare();
         home = new FragmentHome();
         FragmentTransaction ft = getFragmentManager().beginTransaction().add(R.id.container,home);
