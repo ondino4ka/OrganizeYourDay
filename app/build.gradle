@@ -9,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
-        versionName "0.1"
+        versionName "0.1.1"
     }
     buildTypes {
         release {
@@ -29,5 +29,5 @@ dependencies {
 
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.getbase:floatingactionbutton:1.10.1'
-    compile 'com.android.support:support-v4:23.2.0'
+    compile 'com.android.support:support-v4:23.0.2'
 }

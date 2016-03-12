@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity
 
     FragmentShare share;
     FragmentHome home;
-    FragmentHome home1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +51,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        // In case this activity was started with special instructions from an
+        // Intent, pass the Intent's extras to the fragment as arguments
+
 
 
         share =  new FragmentShare();
