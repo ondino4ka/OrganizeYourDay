@@ -2,12 +2,12 @@
 <resources>
     <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryDark">#00897b</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#00897b</color>
 
     <color name="colorNavigationBar">#009688</color>
     <color name="colorBackground">#ffffff</color>
 
     <color name="colorFabNormal">#009688</color>
     <color name="colorFabPressed">#00897b</color>
-    <color name="colorButton">#e0e0e0</color>
+    <color name="colorButton">#212121</color>
 </resources>

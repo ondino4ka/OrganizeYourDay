@@ -9,8 +9,6 @@
     tools:context="com.dreamteam.organizeyourday.SettindsActivity"
     android:id="@+id/settingsLayout">
 
-    <include android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="75dp"

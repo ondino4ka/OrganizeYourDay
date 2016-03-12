@@ -7,9 +7,6 @@
     tools:context="com.dreamteam.organizeyourday.AboutActivity"
     android:id="@+id/aboutLayout">
 
-    <include android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
-
     <Button
         android:id="@+id/buttonAbout"
         android:layout_width="match_parent"
