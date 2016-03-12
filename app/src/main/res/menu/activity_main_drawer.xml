@@ -12,19 +12,19 @@
 
             android:id="@+id/sorting"
             android:icon="@drawable/ic_menu_sorting"
-            android:title="Sorting" />
+            android:title="@string/sorting_inem" />
     </group>
 
-    <item android:title="Settings">
+    <item android:title="@string/nav_bar_settings">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/share_item" />
             <item
                 android:id="@+id/settings"
                 android:icon="@drawable/ic_menu_settings"
-                android:title="Settings" />
+                android:title="@string/settings_item" />
 
             <item
                 android:id="@+id/about"

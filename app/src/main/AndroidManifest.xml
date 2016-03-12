@@ -30,6 +30,7 @@ package="com.dreamteam.organizeyourday">
         android:label="Settings">
 
     </activity>
+
 </application>
 
 </manifest>
