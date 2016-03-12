@@ -1,103 +1,96 @@
 package com.dreamteam.organizeyourday;
 
-
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.DividerDrawerItem;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-
-public class MainActivity extends AppCompatActivity {
-
-    Toolbar toolbar;
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        generateToolbar();
-        generateNavigationDrawer();
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, EditCardActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void generateToolbar() {
-        if(toolbar != null){
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
     }
 
+    @Override
 
-    private void generateNavigationDrawer() {
 
-        final PrimaryDrawerItem homeButton =  new PrimaryDrawerItem()
-                .withName(R.string.nav_bar_home)
-                .withIcon(R.drawable.ic_home_black_24dp);
-        final SecondaryDrawerItem settingsButton = new SecondaryDrawerItem()
-                .withName(R.string.nav_bar_settings)
-                .withIcon(R.drawable.ic_build_black_24dp);
-        final SecondaryDrawerItem aboutButton = new SecondaryDrawerItem()
-                .withName(R.string.nav_bar_about)
-                .withIcon(R.drawable.ic_feedback_black_24dp);
-        final  DividerDrawerItem devider = new DividerDrawerItem();
 
-        AccountHeader account = accountHeader();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-        Drawer navigationDrawer = new DrawerBuilder()
-                .withAccountHeader(account)
-                .withActivity(this)
-                .withToolbar(toolbar)
-                .withActionBarDrawerToggleAnimated(true)
-                .addDrawerItems(
-                        homeButton,
-                        devider,
-                        settingsButton,
-                        aboutButton
-                ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if (drawerItem.equals(settingsButton)){
-                            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                            startActivity(intent);
-                        }else if (drawerItem.equals(aboutButton)) {
-                            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
-                            startActivity((intent));
-                        }
-                        return false;
-                    }
-                })
-                .build();
+        //noinspection SimplifiableIfStatement
+
+
+        return super.onOptionsItemSelected(item);
     }
 
-    private AccountHeader accountHeader(){
-        AccountHeader account = new AccountHeaderBuilder()
-                .withActivity(this)
-                .addProfiles(
-                        new ProfileDrawerItem()
-                                .withName("DreamTeam")
-                                .withEmail("dreamTeam@gmail.com")
-                )
-                .withHeaderBackground(R.drawable.head_wallpaper)
-                .build();
-        return account;
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.home) {
+            // Handle the camera action
+        } else if (id == R.id.about) {
+            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.settings){
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.nav_share){}
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
-
-
-    public void addCard(View view){
-        Intent intent = new Intent(this,EditCardActivity.class);
-        startActivity(intent);
-    }
-
 }

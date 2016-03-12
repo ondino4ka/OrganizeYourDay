@@ -27,73 +27,13 @@ public class SettingsActivity extends AppCompatActivity{
         setContentView(R.layout.settings);
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
-        generateToolbar();
-        generateNavigationDrawer();
+
 
 
     }
 
 
-    private void generateToolbar() {
-        if(toolbar != null){
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        }
-    }
 
-    private void generateNavigationDrawer() {
-
-        final PrimaryDrawerItem homeButton =  new PrimaryDrawerItem()
-                .withName(R.string.nav_bar_home)
-                .withIcon(R.drawable.ic_home_black_24dp);
-        final SecondaryDrawerItem settingsButton = new SecondaryDrawerItem()
-                .withName(R.string.nav_bar_settings)
-                .withIcon(R.drawable.ic_build_black_24dp);
-        final SecondaryDrawerItem aboutButton = new SecondaryDrawerItem()
-                .withName(R.string.nav_bar_about)
-                .withIcon(R.drawable.ic_feedback_black_24dp);
-        final DividerDrawerItem devider = new DividerDrawerItem();
-
-        AccountHeader account = accountHeader();
-
-        Drawer navigationDrawer = new DrawerBuilder()
-                .withAccountHeader(account)
-                .withActivity(this)
-                .withToolbar(toolbar)
-                .withActionBarDrawerToggleAnimated(true)
-                .addDrawerItems(
-                        homeButton,
-                        devider,
-                        settingsButton,
-                        aboutButton
-                ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-
-                        if (drawerItem.equals(homeButton)){
-                            Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        }else if (drawerItem.equals(aboutButton)) {
-                            Intent intent = new Intent(SettingsActivity.this, AboutActivity.class);
-                            startActivity((intent));
-                        }
-                        return false;
-                    }
-                })
-                .build();
-    }
-    private AccountHeader accountHeader(){
-        AccountHeader account = new AccountHeaderBuilder()
-                .withActivity(this)
-                .addProfiles(
-                        new ProfileDrawerItem()
-                                .withName("DreamTeam")
-                                .withEmail("dreamTeam@gmail.com")
-                )
-                .withHeaderBackground(R.drawable.head_wallpaper)
-                .build();
-        return account;
-    }
 
 }
