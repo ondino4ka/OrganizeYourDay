@@ -3,7 +3,7 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/md_grey_200"
+    android:background="@color/colorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.dreamteam.organizeyourday.SettindsActivity"
@@ -12,13 +12,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:background="@color/md_grey_200"
+        android:background="@color/md_grey_100"
         android:text="Удалить все пользовательские данные"
         android:id="@+id/settingButton_0"
         android:layout_gravity="center_horizontal" />
 
     <Button
-        android:background="@color/md_grey_200"
+        android:background="@color/md_grey_100"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:text="Выбрать тему"
