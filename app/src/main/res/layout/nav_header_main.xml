@@ -21,7 +21,10 @@
         android:src="@mipmap/ic_launcher"
         android:focusable="false"
         android:adjustViewBounds="false"
-        android:baselineAlignBottom="false" />
+        android:baselineAlignBottom="false"
+        android:clickable="false"
+        android:onClick="jumpToAccount"
+        android:contextClickable="false" />
 
     <TextView
 

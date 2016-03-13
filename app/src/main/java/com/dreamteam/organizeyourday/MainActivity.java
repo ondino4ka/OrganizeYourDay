@@ -122,4 +122,10 @@ ftrans.commit();
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
+
+    public void jumpToAccount(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, Account.class);
+        startActivity(intent);
+    }
 }

@@ -30,6 +30,10 @@ package="com.dreamteam.organizeyourday">
         android:label="Settings">
 
     </activity>
+    <activity android:name=".Account"
+        android:label="Account">
+
+    </activity>
 
 </application>
 
