@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Данные"
+        android:key="pref_data"
+        >
+
+
+        <EditTextPreference
+
+            android:key="format_data"
+            android:title="Удалить данные"
+            android:summary="Удаляет все пользовательские данные"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:defaultValue="true"
+            />
+    </PreferenceCategory>
+
+    <ListPreference
+        android:key="theme_list"
+        android:defaultValue="-1"
+        android:title="Тема"
+        android:entries="@array/themes_list"
+        android:entryValues="@array/themes_list_values"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+
+        />
+</PreferenceScreen>
