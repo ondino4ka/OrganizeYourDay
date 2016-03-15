@@ -51,7 +51,14 @@
         <item>2</item>
     </string-array>
 
+    <string name="about_name">Organize Your Day</string>
+    <string name="about_text">\n<b>Распространяется по лицензии GPL</b>\nВерсия 0.1.2\n\n© Plexiform, 2016\n\n</string>
 
+    <string name="pref_decor">Оформление</string>
+    <string name="pref_data">Данные</string>
+    <string name="pref_format_data_title">Удалить данные</string>
+    <string name="pref_format_data_summary">Удаляет все пользовательские данные</string>
+    <string name="pref_themes_title">Тема</string>
 
     <string-array name="themes_list">
         <item>Green Theme</item>

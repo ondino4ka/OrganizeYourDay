@@ -19,7 +19,8 @@ package="com.dreamteam.organizeyourday">
         </intent-filter>
     </activity>
     <activity android:name=".AboutActivity"
-        android:label="About">
+        android:label="@string/about_name"
+        android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
 
     </activity>
     <activity android:name=".EditCardActivity"

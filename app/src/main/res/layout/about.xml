@@ -1,43 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorBackground"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.dreamteam.organizeyourday.AboutActivity"
-    android:id="@+id/aboutLayout">
-
-    <Button
-        android:id="@+id/buttonAbout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="About"
-        android:background="@color/md_grey_100"
-        android:onClick="setTextAbout"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentStart="true" />
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textAbout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="      Organize Your Day\n  Copyright© 2016 Plexiform"
-        android:textSize="18dp"
-        android:textStyle="italic"
-        android:textColor="#616161"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:text="@string/about_text"
+        android:layout_marginLeft="@dimen/about_text_horizontal_margin"
+        android:textStyle="normal" />
 
-    <TextView
-        android:id="@+id/textRepository"
-        android:textSize="14dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:onClick="jumpToRepository"
-        android:textColor="#304FFE"
-        android:textStyle="italic"
-        android:layout_below="@+id/buttonAbout"
-        android:layout_alignParentStart="true" />
-</RelativeLayout>
+
+
+</ScrollView>
