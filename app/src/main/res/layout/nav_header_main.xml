@@ -15,16 +15,17 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="69dp"
+        android:layout_width="71dp"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/ic_timer_auto_24dp"
         android:focusable="false"
         android:adjustViewBounds="false"
         android:baselineAlignBottom="false"
         android:clickable="false"
         android:onClick="jumpToAccount"
-        android:contextClickable="false" />
+        android:contextClickable="false"
+        android:layout_weight="0.74" />
 
     <TextView
 
