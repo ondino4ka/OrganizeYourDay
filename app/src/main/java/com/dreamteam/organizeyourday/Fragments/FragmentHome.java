@@ -86,6 +86,8 @@ public class FragmentHome extends android.app.Fragment {
         }
     }
 
+
+
     @Override
     public void onDetach() {
         super.onDetach();

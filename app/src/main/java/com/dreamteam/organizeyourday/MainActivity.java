@@ -31,12 +31,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(this.index==2) {
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-            int theme = sp.getInt("THEME", R.style.Pink_NoActionBar);
-            setTheme(theme);
-        }
-
+        seCurrentTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -71,6 +66,7 @@ public class MainActivity extends AppCompatActivity
         share =  new FragmentShare();
         home = new FragmentHome();
         FragmentTransaction ft = getFragmentManager().beginTransaction().add(R.id.container,home);
+        ft.addToBackStack("");
         ft.commit();
     }
 
@@ -79,17 +75,13 @@ public class MainActivity extends AppCompatActivity
     protected void onRestart() {
         super.onRestart();
         if (isCurrentThemeChanged) {
-            recreate();
             isCurrentThemeChanged=false;
+            recreate();
         }else {
             isCurrentThemeChanged=false;
         }
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
 
     @Override
     public void onBackPressed() {
@@ -125,10 +117,12 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ftrans= getFragmentManager().beginTransaction();
         if (id == R.id.home) {
             fab.show();
+          //ftrans.addToBackStack(null);
            ftrans.replace(R.id.container, home);
         }
         else if (id == R.id.nav_share){
             fab.hide();
+
             ftrans.replace(R.id.container, share);
         }
         else if (id == R.id.about) {
@@ -151,6 +145,27 @@ ftrans.commit();
         public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
+    }
+
+    private void seCurrentTheme()
+    {
+        int theme;
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        switch(index)
+        {
+            case 0:
+                theme = sp.getInt("THEME", R.style.AppTheme_NoActionBar);
+                setTheme(theme);
+                break;
+            case 1:
+                break;
+            case 2:
+                theme = sp.getInt("THEME", R.style.Pink_NoActionBar);
+                setTheme(theme);
+                break;
+            default:
+                break;
+        }
     }
 
     public void jumpToAccount(View view)

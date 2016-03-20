@@ -1,5 +1,6 @@
 package com.dreamteam.organizeyourday.Fragments;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -15,7 +16,8 @@ public class SettingsFragment extends PreferenceFragment{
 
 
 
-    private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener
+
+    private  Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener
             = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
@@ -40,12 +42,16 @@ public class SettingsFragment extends PreferenceFragment{
 
             }
 
+            /*
+            Intent intent = new Intent(, MainActivity.class);
+            startActivity(intent);*/
+
             return true;
 
         }
     };
 
-        private static void bindPreferenceSummaryToValue(Preference preference) {
+        private  void bindPreferenceSummaryToValue(Preference preference) {
             preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 
             sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
@@ -68,9 +74,5 @@ public class SettingsFragment extends PreferenceFragment{
 
     }
 
-private void goToMain()
-{
-
-}
 
 }

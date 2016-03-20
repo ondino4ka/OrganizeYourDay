@@ -14,14 +14,29 @@ public class Account extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        if(MainActivity.index==2) {
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-            int theme = sp.getInt("THEME", R.style.Pink);
-            setTheme(theme);
-        }
-
+        seCurrentTheme();
         super.onCreate(savedInstanceState);
 
+    }
+
+    private void seCurrentTheme()
+    {
+        int theme;
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        switch(MainActivity.index)
+        {
+            case 0:
+                theme = sp.getInt("THEME", R.style.AppTheme);
+                setTheme(theme);
+                break;
+            case 1:
+                break;
+            case 2:
+                theme = sp.getInt("THEME", R.style.Pink);
+                setTheme(theme);
+                break;
+            default:
+                break;
+        }
     }
 }
