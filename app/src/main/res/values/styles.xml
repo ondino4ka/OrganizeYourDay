@@ -20,7 +20,6 @@
         <item name="colorPrimary">@color/md_pink_500</item>
         <item name="colorPrimaryDark">@color/md_pink_600</item>
         <item name="colorAccent">@color/md_pink_700</item>
-        <item name="android:colorBackground">@color/background_material_light</item>
     </style>
 
     <style name="Pink.NoActionBar">

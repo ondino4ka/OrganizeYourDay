@@ -2,7 +2,9 @@ package com.dreamteam.organizeyourday;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,16 +18,25 @@ import android.view.MenuItem;
 
 import com.dreamteam.organizeyourday.Fragments.FragmentHome;
 import com.dreamteam.organizeyourday.Fragments.FragmentShare;
+import com.dreamteam.organizeyourday.Fragments.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static int index = 0;
+    public  static boolean isCurrentThemeChanged;
     FragmentShare share;
     FragmentHome home;
     FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(this.index==2) {
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+            int theme = sp.getInt("THEME", R.style.Pink_NoActionBar);
+            setTheme(theme);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -63,6 +74,23 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
     }
 
+    //private boolean isFirstStart = true;
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (isCurrentThemeChanged) {
+            recreate();
+            isCurrentThemeChanged=false;
+        }else {
+            isCurrentThemeChanged=false;
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -98,7 +126,12 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.home) {
             fab.show();
            ftrans.replace(R.id.container, home);
-        } else if (id == R.id.about) {
+        }
+        else if (id == R.id.nav_share){
+            fab.hide();
+            ftrans.replace(R.id.container, share);
+        }
+        else if (id == R.id.about) {
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(intent);
         }
@@ -106,10 +139,7 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         }
-        else if (id == R.id.nav_share){
-            fab.hide();
-            ftrans.replace(R.id.container, share);
-        }
+
 ftrans.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
