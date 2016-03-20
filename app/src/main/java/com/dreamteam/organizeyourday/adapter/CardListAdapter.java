@@ -14,7 +14,9 @@ import java.util.List;
 
 public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardViewHolder>  {
 
-    private List<CardsData> data;
+
+
+    private static List<CardsData> data;
 
     public CardListAdapter(List<CardsData> data) {
         this.data = data;
@@ -34,6 +36,10 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public static void data1() {
+        data.add(new CardsData("123"));
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder{

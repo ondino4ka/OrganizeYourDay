@@ -28,6 +28,7 @@ public class FragmentHome extends android.app.Fragment {
     private Context context;
     private OnFragmentInteractionListener mListener;
     private View view;
+    private CardListAdapter cdAdapter;
 
 
     public static FragmentHome newInstance(String param1, String param2) {
@@ -54,7 +55,8 @@ public class FragmentHome extends android.app.Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
         rv.setLayoutManager(new LinearLayoutManager(context));
-        rv.setAdapter(new CardListAdapter(getMokeData()));
+        cdAdapter = new CardListAdapter(getMokeData());
+        rv.setAdapter(cdAdapter);
         return view;
     }
 
@@ -83,38 +85,12 @@ public class FragmentHome extends android.app.Fragment {
 
     public List<CardsData> getMokeData() {
         List<CardsData> mokeData = new ArrayList<>();
-        mokeData.add(new CardsData("10"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
-        mokeData.add(new CardsData("1"));
         return mokeData;
     }
+
+    public void getRefrache(){
+        cdAdapter.notifyDataSetChanged();
+        }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

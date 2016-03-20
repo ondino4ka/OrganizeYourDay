@@ -16,6 +16,10 @@ import android.view.MenuItem;
 
 import com.dreamteam.organizeyourday.Fragments.FragmentHome;
 import com.dreamteam.organizeyourday.Fragments.FragmentShare;
+import com.dreamteam.organizeyourday.adapter.CardListAdapter;
+import com.dreamteam.organizeyourday.dataOfCards.CardsData;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,15 +34,18 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        share =  new FragmentShare();
+        home = new FragmentHome();
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, EditCardActivity.class);
-                startActivity(intent);
+                CardListAdapter.data1();
+                home.getRefrache();
+                //Intent intent = new Intent(MainActivity.this, EditCardActivity.class);
+                //startActivity(intent);
 
             }
         });
@@ -57,8 +64,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        share =  new FragmentShare();
-        home = new FragmentHome();
+
         FragmentTransaction ft = getFragmentManager().beginTransaction().add(R.id.container,home);
         ft.commit();
     }
