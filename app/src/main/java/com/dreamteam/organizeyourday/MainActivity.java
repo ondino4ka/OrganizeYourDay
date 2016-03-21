@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.notifications){
             fab.hide();
-            Intent intent = new Intent(MainActivity.this, Notifications.class);
+            Intent intent = new Intent(MainActivity.this, TimeNotification.class);
             startActivity(intent);
         }
 ftrans.commit();

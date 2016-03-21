@@ -36,10 +36,12 @@ package="com.dreamteam.organizeyourday">
 
     </activity>
 
-    <activity android:name=".Notifications"
-        android:label="Notifications">
-
+    <activity android:name=".TimeNotification"
+        android:label="TimeNotifications">
     </activity>
+    <receiver android:name=".Notifications"/>
+
+
 
 </application>
 
