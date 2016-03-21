@@ -37,8 +37,10 @@ public class Notifications extends BroadcastReceiver {
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
                 .setContentTitle("Важное уведомление")
-                .setContentText("Нажмите,чтобы перейти");
+                .setContentText("Нажмите чтобы перейти");
         Notification notification = builder.build();
+
+        notification.defaults = Notification.DEFAULT_ALL ;
         nm.notify(NOTIFICATION_ID, notification);
 
     }
