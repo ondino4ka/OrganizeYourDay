@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
     android:layout_marginRight="12dp"
     android:layout_marginLeft="12dp"
     >
@@ -20,21 +19,34 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_timer_auto_24dp"
+                />
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18dp"
-                android:padding="5dp"
+                android:paddingTop="5dp"
+                android:paddingLeft="5dp"
                 android:id="@+id/title"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Test information"
-                android:textSize="18dp"
-                android:padding="5dp" />
+                android:textSize="15dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp" />
+</LinearLayout>
 
         </LinearLayout>
 
