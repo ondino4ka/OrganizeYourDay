@@ -116,6 +116,11 @@ public class MainActivity extends AppCompatActivity
             fab.hide();
             ftrans.replace(R.id.container, share);
         }
+        else if (id == R.id.notifications){
+            fab.hide();
+            Intent intent = new Intent(MainActivity.this, TimeNotification.class);
+            startActivity(intent);
+        }
 ftrans.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

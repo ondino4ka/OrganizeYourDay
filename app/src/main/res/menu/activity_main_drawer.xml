@@ -30,6 +30,11 @@
                 android:id="@+id/about"
                 android:icon="@drawable/ic_info"
                 android:title="About"/>
+
+            <item
+                android:id="@+id/notifications"
+                android:icon="@drawable/ic_info"
+                android:title="Notifications"/>
         </menu>
     </item>
 
