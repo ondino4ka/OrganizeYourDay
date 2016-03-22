@@ -2,7 +2,9 @@ package com.dreamteam.organizeyourday;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,24 +20,28 @@ import com.dreamteam.organizeyourday.Fragments.FragmentHome;
 import com.dreamteam.organizeyourday.Fragments.FragmentShare;
 import com.dreamteam.organizeyourday.adapter.CardListAdapter;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
-
-import java.util.List;
+import com.dreamteam.organizeyourday.Fragments.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static int index = 0;
+    private static boolean isFirstStart = true;
+    public  static boolean isCurrentThemeChanged;
     FragmentShare share;
     FragmentHome home;
     FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        seCurrentTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         share =  new FragmentShare();
         home = new FragmentHome();
+
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -63,10 +69,53 @@ public class MainActivity extends AppCompatActivity
         // Intent, pass the Intent's extras to the fragment as arguments
 
 
-
-
-        FragmentTransaction ft = getFragmentManager().beginTransaction().add(R.id.container,home);
+        share = new FragmentShare();
+        home = new FragmentHome();
+        FragmentTransaction ft = getFragmentManager().beginTransaction().add(R.id.container, home);
+        if (isFirstStart) {
+            isFirstStart = false;
+            ft.addToBackStack(null);
+            ft.commit();
+        } else {
+            ft.show(home);
+        }
+        
         ft.commit();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        if (isCurrentThemeChanged) {
+            isCurrentThemeChanged=false;
+            recreate();
+        }else {
+            isCurrentThemeChanged=false;
+        }
+    }
+
+    private void seCurrentTheme()
+    {
+        int theme;
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        switch(index)
+        {
+            case 0:
+                theme = sp.getInt("THEME", R.style.AppTheme_NoActionBar);
+                setTheme(theme);
+                break;
+            case 1:
+                theme = sp.getInt("THEME", R.style.Blue_NoActionBar);
+                setTheme(theme);
+                break;
+            case 2:
+                theme = sp.getInt("THEME", R.style.Pink_NoActionBar);
+                setTheme(theme);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -103,8 +152,13 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ftrans= getFragmentManager().beginTransaction();
         if (id == R.id.home) {
             fab.show();
-           ftrans.replace(R.id.container, home);
-        } else if (id == R.id.about) {
+            ftrans.replace(R.id.container, home);
+        }
+        else if (id == R.id.nav_share){
+            fab.hide();
+            ftrans.replace(R.id.container, share);
+        }
+        else if (id == R.id.about) {
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(intent);
         }

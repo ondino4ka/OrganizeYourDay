@@ -62,13 +62,13 @@
 
     <string-array name="themes_list">
         <item>Green Theme</item>
-        <item>Black Theme</item>
+        <item>Blue Theme</item>
         <item>Pink Theme</item>
     </string-array>
     <string-array name="themes_list_values">
-        <item>1</item>
         <item>0</item>
-        <item>-1</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
 </resources>
