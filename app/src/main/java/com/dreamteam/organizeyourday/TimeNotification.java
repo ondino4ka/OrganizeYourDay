@@ -3,13 +3,13 @@ package com.dreamteam.organizeyourday;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-/**
- * Created by kostya on 21.03.2016.
- */
+
 public class TimeNotification extends AppCompatActivity {
 
 
@@ -17,6 +17,7 @@ public class TimeNotification extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeManager.setCurrentTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notifications);
         am = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -30,4 +31,6 @@ public class TimeNotification extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         am.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pendingIntent);
     }
+
+
 }

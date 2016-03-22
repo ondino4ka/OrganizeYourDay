@@ -7,6 +7,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import com.dreamteam.organizeyourday.MainActivity;
 import com.dreamteam.organizeyourday.R;
+import com.dreamteam.organizeyourday.ThemeManager;
 
 public class SettingsFragment extends PreferenceFragment{
 
@@ -22,7 +23,7 @@ public class SettingsFragment extends PreferenceFragment{
             if (preference instanceof ListPreference) {
                 ListPreference listPreference = (ListPreference) preference;
 
-                if(MainActivity.index!=listPreference.findIndexOfValue(stringValue))
+                if(ThemeManager.index!=listPreference.findIndexOfValue(stringValue))
                 {
                     MainActivity.isCurrentThemeChanged = true;
                 }
@@ -30,10 +31,10 @@ public class SettingsFragment extends PreferenceFragment{
                     MainActivity.isCurrentThemeChanged = false;
                 }
 
-                MainActivity.index = listPreference.findIndexOfValue(stringValue);
+                ThemeManager.index = listPreference.findIndexOfValue(stringValue);
                 preference.setSummary(
-                        MainActivity.index >= 0
-                                ? listPreference.getEntries()[MainActivity.index]
+                        ThemeManager.index >= 0
+                                ? listPreference.getEntries()[ThemeManager.index]
                                 : null);
 
             }
