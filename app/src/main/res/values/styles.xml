@@ -7,12 +7,13 @@
         <item name="colorAccent">@color/AccentGreen</item>
 
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!--Pink Theme -->
@@ -26,8 +27,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="Pink.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="Pink.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Pink.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!--Blue Theme -->
@@ -41,7 +42,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="Blue.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="Blue.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Blue.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
