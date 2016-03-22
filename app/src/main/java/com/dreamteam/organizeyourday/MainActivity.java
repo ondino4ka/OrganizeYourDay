@@ -19,8 +19,6 @@ import android.view.MenuItem;
 import com.dreamteam.organizeyourday.Fragments.FragmentHome;
 import com.dreamteam.organizeyourday.Fragments.FragmentShare;
 import com.dreamteam.organizeyourday.adapter.CardListAdapter;
-import com.dreamteam.organizeyourday.dataOfCards.CardsData;
-import com.dreamteam.organizeyourday.Fragments.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,13 +26,14 @@ public class MainActivity extends AppCompatActivity
     public static int index = 0;
     private static boolean isFirstStart = true;
     public  static boolean isCurrentThemeChanged;
+
     FragmentShare share;
     FragmentHome home;
     FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        seCurrentTheme();
+        setCurrentTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -44,15 +43,11 @@ public class MainActivity extends AppCompatActivity
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CardListAdapter.data1();
                 home.getRefrache();
-                //Intent intent = new Intent(MainActivity.this, EditCardActivity.class);
-                //startActivity(intent);
-
             }
         });
 
@@ -64,13 +59,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        // In case this activity was started with special instructions from an
-        // Intent, pass the Intent's extras to the fragment as arguments
-
-
-        share = new FragmentShare();
-        home = new FragmentHome();
         FragmentTransaction ft = getFragmentManager().beginTransaction().add(R.id.container, home);
         if (isFirstStart) {
             isFirstStart = false;
@@ -79,8 +67,6 @@ public class MainActivity extends AppCompatActivity
         } else {
             ft.show(home);
         }
-        
-        ft.commit();
     }
 
     @Override
@@ -95,12 +81,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void seCurrentTheme()
-    {
+    private void setCurrentTheme() {
         int theme;
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        switch(index)
-        {
+        switch(index) {
             case 0:
                 theme = sp.getInt("THEME", R.style.AppTheme_NoActionBar);
                 setTheme(theme);
@@ -133,21 +117,13 @@ public class MainActivity extends AppCompatActivity
 
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
         FragmentTransaction ftrans= getFragmentManager().beginTransaction();
         if (id == R.id.home) {
@@ -188,8 +164,7 @@ ftrans.commit();
         return true;
     }
 
-    public void jumpToAccount(View view)
-    {
+    public void jumpToAccount(View view) {
         Intent intent = new Intent(MainActivity.this, Account.class);
         startActivity(intent);
     }
