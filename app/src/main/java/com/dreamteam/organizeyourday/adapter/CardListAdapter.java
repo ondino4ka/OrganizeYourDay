@@ -15,7 +15,6 @@ import java.util.List;
 public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardViewHolder>  {
 
 
-
     private static List<CardsData> data;
 
     public CardListAdapter(List<CardsData> data) {
@@ -38,18 +37,18 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         return data.size();
     }
 
-    public static void data1() {
-        data.add(new CardsData("123"));
+    public static void addCard() {
+        data.add(new CardsData("Test card"));
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder{
 
-        CardView cardView;
+        CardView card;
         TextView title;
 
         public CardViewHolder(View itemView) {
             super(itemView);
-            CardView card = (CardView)itemView.findViewById(R.id.card);
+            card = (CardView)itemView.findViewById(R.id.card);
             title = (TextView)itemView.findViewById(R.id.title);
         }
     }

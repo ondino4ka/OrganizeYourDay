@@ -2,9 +2,7 @@ package com.dreamteam.organizeyourday;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -32,7 +30,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-      //  setCurrentTheme();
         ThemeManager.setCurrentMainTheme(this);
 
         super.onCreate(savedInstanceState);
@@ -45,8 +42,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CardListAdapter.data1();
-                home.getRefrache();
+                CardListAdapter.addCard();
+                home.refreshAdapter();
             }
         });
 
@@ -84,7 +81,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -106,32 +102,31 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         FragmentTransaction ftrans= getFragmentManager().beginTransaction();
-        if (id == R.id.home) {
-            fab.show();
-            ftrans.show(home);
-            //ftrans.replace(R.id.container, home);
-        }
-        else if (id == R.id.nav_share){
-            fab.hide();
-            ftrans.show(share);
-            //ftrans.replace(R.id.container, share);
-        }
-        else if (id == R.id.about) {
-            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.settings){
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.nav_share){
-            fab.hide();
-            ftrans.replace(R.id.container, share);
-        }
-        else if (id == R.id.notifications){
-            fab.hide();
-            Intent intent = new Intent(MainActivity.this, TimeNotification.class);
-            startActivity(intent);
+        Intent intent;
+        switch (id){
+            case R.id.home:
+                fab.show();
+                ftrans.show(home);
+                //ftrans.replace(R.id.container, home);
+                break;
+            case R.id.nav_share:
+                fab.hide();
+                ftrans.show(share);
+                //ftrans.replace(R.id.container, share);
+                break;
+            case R.id.about:
+                intent = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.settings:
+                intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.notifications:
+                fab.hide();
+                intent = new Intent(MainActivity.this, TimeNotification.class);
+                startActivity(intent);
+                break;
         }
 ftrans.commit();
 

@@ -18,7 +18,6 @@ import java.util.List;
 
 public class FragmentHome extends android.app.Fragment {
 
-
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -55,7 +54,7 @@ public class FragmentHome extends android.app.Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
         rv.setLayoutManager(new LinearLayoutManager(context));
-        cdAdapter = new CardListAdapter(getMokeData());
+        cdAdapter = new CardListAdapter(testData());
         rv.setAdapter(cdAdapter);
         return view;
     }
@@ -77,20 +76,18 @@ public class FragmentHome extends android.app.Fragment {
         }
     }
 
-
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-    public List<CardsData> getMokeData() {
-        List<CardsData> mokeData = new ArrayList<>();
-        return mokeData;
+    public List<CardsData> testData() {
+        List<CardsData> testData = new ArrayList<>();
+        return testData;
     }
 
-    public void getRefrache(){
+    public void refreshAdapter(){
         cdAdapter.notifyDataSetChanged();
         }
 
