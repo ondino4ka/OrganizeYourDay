@@ -15,7 +15,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-
+    <!--Pink Theme -->
     <style name="Pink" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/PrimaryPink</item>
         <item name="colorPrimaryDark">@color/PrimaryDarkPink</item>
@@ -29,4 +29,19 @@
     <style name="Pink.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Pink.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--Blue Theme -->
+    <style name="Blue" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/PrimaryBlue</item>
+        <item name="colorPrimaryDark">@color/PrimaryDarkBlue</item>
+        <item name="colorAccent">@color/AccentBlue</item>
+    </style>
+
+    <style name="Blue.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Blue.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Blue.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

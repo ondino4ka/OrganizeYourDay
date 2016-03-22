@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static int index = 0;
+    private static boolean isFirstStart = true;
     public  static boolean isCurrentThemeChanged;
     FragmentShare share;
     FragmentHome home;
@@ -62,18 +63,22 @@ public class MainActivity extends AppCompatActivity
         // Intent, pass the Intent's extras to the fragment as arguments
 
 
-
-        share =  new FragmentShare();
+        share = new FragmentShare();
         home = new FragmentHome();
-        FragmentTransaction ft = getFragmentManager().beginTransaction().add(R.id.container,home);
-        ft.addToBackStack("");
-        ft.commit();
+        FragmentTransaction ft = getFragmentManager().beginTransaction().add(R.id.container, home);
+        if (isFirstStart) {
+            isFirstStart = false;
+            ft.addToBackStack(null);
+            ft.commit();
+        } else {
+            ft.show(home);
+        }
     }
 
-    //private boolean isFirstStart = true;
     @Override
     protected void onRestart() {
         super.onRestart();
+
         if (isCurrentThemeChanged) {
             isCurrentThemeChanged=false;
             recreate();
@@ -82,6 +87,28 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private void seCurrentTheme()
+    {
+        int theme;
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        switch(index)
+        {
+            case 0:
+                theme = sp.getInt("THEME", R.style.AppTheme_NoActionBar);
+                setTheme(theme);
+                break;
+            case 1:
+                theme = sp.getInt("THEME", R.style.Blue_NoActionBar);
+                setTheme(theme);
+                break;
+            case 2:
+                theme = sp.getInt("THEME", R.style.Pink_NoActionBar);
+                setTheme(theme);
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -117,12 +144,10 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ftrans= getFragmentManager().beginTransaction();
         if (id == R.id.home) {
             fab.show();
-          //ftrans.addToBackStack(null);
-           ftrans.replace(R.id.container, home);
+            ftrans.replace(R.id.container, home);
         }
         else if (id == R.id.nav_share){
             fab.hide();
-
             ftrans.replace(R.id.container, share);
         }
         else if (id == R.id.about) {
@@ -147,26 +172,7 @@ ftrans.commit();
         return true;
     }
 
-    private void seCurrentTheme()
-    {
-        int theme;
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        switch(index)
-        {
-            case 0:
-                theme = sp.getInt("THEME", R.style.AppTheme_NoActionBar);
-                setTheme(theme);
-                break;
-            case 1:
-                break;
-            case 2:
-                theme = sp.getInt("THEME", R.style.Pink_NoActionBar);
-                setTheme(theme);
-                break;
-            default:
-                break;
-        }
-    }
+
 
     public void jumpToAccount(View view)
     {

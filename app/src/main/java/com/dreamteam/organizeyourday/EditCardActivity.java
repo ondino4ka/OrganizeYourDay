@@ -28,6 +28,8 @@ public class EditCardActivity extends AppCompatActivity {
                 setTheme(theme);
                 break;
             case 1:
+                theme = sp.getInt("THEME", R.style.Blue);
+                setTheme(theme);
                 break;
             case 2:
                 theme = sp.getInt("THEME", R.style.Pink);

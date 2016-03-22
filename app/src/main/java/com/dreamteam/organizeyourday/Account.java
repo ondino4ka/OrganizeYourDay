@@ -7,9 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.dreamteam.organizeyourday.Fragments.SettingsFragment;
 
-/**
- * Created by kostya on 13.03.2016.
- */
 public class Account extends AppCompatActivity {
 
     @Override
@@ -30,6 +27,8 @@ public class Account extends AppCompatActivity {
                 setTheme(theme);
                 break;
             case 1:
+                theme = sp.getInt("THEME", R.style.Blue);
+                setTheme(theme);
                 break;
             case 2:
                 theme = sp.getInt("THEME", R.style.Pink);

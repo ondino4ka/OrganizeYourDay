@@ -1,23 +1,19 @@
 package com.dreamteam.organizeyourday.Fragments;
 
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-
 import com.dreamteam.organizeyourday.MainActivity;
 import com.dreamteam.organizeyourday.R;
-import com.dreamteam.organizeyourday.SettingsActivity;
 
 public class SettingsFragment extends PreferenceFragment{
 
 
 
 
-    private  Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener
+    private static  Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener
             = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
@@ -34,7 +30,7 @@ public class SettingsFragment extends PreferenceFragment{
                     MainActivity.isCurrentThemeChanged = false;
                 }
 
-                 MainActivity.index = listPreference.findIndexOfValue(stringValue);
+                MainActivity.index = listPreference.findIndexOfValue(stringValue);
                 preference.setSummary(
                         MainActivity.index >= 0
                                 ? listPreference.getEntries()[MainActivity.index]
@@ -42,16 +38,15 @@ public class SettingsFragment extends PreferenceFragment{
 
             }
 
-            /*
-            Intent intent = new Intent(, MainActivity.class);
-            startActivity(intent);*/
+
+
 
             return true;
 
         }
     };
 
-        private  void bindPreferenceSummaryToValue(Preference preference) {
+        private static void bindPreferenceSummaryToValue(Preference preference) {
             preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 
             sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
@@ -59,18 +54,18 @@ public class SettingsFragment extends PreferenceFragment{
                             .getDefaultSharedPreferences(preference.getContext())
                             .getString(preference.getKey(), ""));
 
+
+
         }
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public  void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         setHasOptionsMenu(true);
         bindPreferenceSummaryToValue(findPreference("pref_themes_list"));
-
-
 
     }
 
