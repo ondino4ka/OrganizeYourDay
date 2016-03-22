@@ -1,28 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dreamteam.organizeyourday">
+package="com.dreamteam.organizeyourday">
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+<application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme">
+    <activity
+        android:name=".MainActivity"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:theme="@style/AppTheme.NoActionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".SettingsActivity"
-            android:label="Settings">
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    <activity android:name=".AboutActivity"
+        android:label="@string/about_name"
+        android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
 
-        </activity>
-        <activity android:name=".AboutActivity"
-            android:label="About">
+    </activity>
+    <activity android:name=".EditCardActivity"
+        android:label="EditCard">
 
-        </activity>
-    </application>
+    </activity>
+    <activity android:name=".SettingsActivity"
+        android:label="Settings">
+
+    </activity>
+    <activity android:name=".Account"
+        android:label="Account">
+
+    </activity>
+
+    <activity android:name=".TimeNotification"
+        android:label="TimeNotifications">
+    </activity>
+    <receiver android:name=".Notifications"/>
+
+
+
+</application>
 
 </manifest>

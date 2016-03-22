@@ -1,11 +1,48 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:navigationBarColor">@color/colorNavigationBar</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/PrimaryGreen</item>
+        <item name="colorPrimaryDark">@color/PrimaryDarkGreen</item>
+        <item name="colorAccent">@color/AccentGreen</item>
+
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--Pink Theme -->
+    <style name="Pink" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/PrimaryPink</item>
+        <item name="colorPrimaryDark">@color/PrimaryDarkPink</item>
+        <item name="colorAccent">@color/AccentPink</item>
+    </style>
+
+    <style name="Pink.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Pink.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Pink.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--Blue Theme -->
+    <style name="Blue" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/PrimaryBlue</item>
+        <item name="colorPrimaryDark">@color/PrimaryDarkBlue</item>
+        <item name="colorAccent">@color/AccentBlue</item>
+    </style>
+
+    <style name="Blue.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Blue.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Blue.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

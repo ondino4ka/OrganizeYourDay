@@ -1,0 +1,18 @@
+package com.dreamteam.organizeyourday;
+
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class EditCardActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        ThemeManager.setCurrentTheme(this);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_card);
+    }
+
+
+}
