@@ -32,5 +32,11 @@ public class TimeNotification extends AppCompatActivity {
         am.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pendingIntent);
     }
 
+//для базы данных
+    public void openlayout(View view) {
+        Intent intent;
+        intent = new Intent(TimeNotification.this, DataBaseTest.class);
+        startActivity(intent);
 
+    }
 }
