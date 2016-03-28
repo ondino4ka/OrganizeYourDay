@@ -1,13 +1,15 @@
 package com.dreamteam.organizeyourday.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.dreamteam.organizeyourday.EditCardActivity;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
 
@@ -29,8 +31,16 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     }
 
     @Override
-    public void onBindViewHolder(CardViewHolder holder, int position) {
+    public void onBindViewHolder(final CardViewHolder holder, int position) {
         holder.title.setText(data.get(position).getTitle());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), EditCardActivity.class);
+                intent.putExtra("title", holder.title.getText().toString());
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
