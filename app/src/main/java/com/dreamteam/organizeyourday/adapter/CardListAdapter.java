@@ -2,6 +2,7 @@ package com.dreamteam.organizeyourday.adapter;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +38,9 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         return data.size();
     }
 
-    public static void addCard() {
-        data.add(new CardsData("Test card"));
+    public void setData(List<CardsData> data){
+        this.data = data;
+
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder{
@@ -46,7 +48,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         CardView card;
         TextView title;
 
-        public CardViewHolder(View itemView) {
+        public CardViewHolder(final View itemView) {
             super(itemView);
             card = (CardView)itemView.findViewById(R.id.card);
             title = (TextView)itemView.findViewById(R.id.title);

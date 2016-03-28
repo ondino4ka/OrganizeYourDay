@@ -3,15 +3,18 @@ package com.dreamteam.organizeyourday.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.animation.Animation;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.adapter.CardListAdapter;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
+import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +28,13 @@ public class FragmentHome extends android.app.Fragment {
     private String mParam2;
 
     private Context context;
-    private OnFragmentInteractionListener mListener;
+    int counter =0;
     private View view;
     private CardListAdapter cdAdapter;
+    List<CardsData> testData;
 
 
-    public static FragmentHome newInstance(String param1, String param2) {
+    public static FragmentHome getInstance(String param1, String param2) {
         FragmentHome fragment = new FragmentHome();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -53,46 +57,59 @@ public class FragmentHome extends android.app.Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
+        RecyclerView.ItemAnimator animation = new DefaultItemAnimator();
         rv.setLayoutManager(new LinearLayoutManager(context));
+        rv.setItemAnimator(animation);
         cdAdapter = new CardListAdapter(testData());
         rv.setAdapter(cdAdapter);
+
+        SwipeableRecyclerViewTouchListener swipeTouchListener =
+                new SwipeableRecyclerViewTouchListener(rv,
+                        new SwipeableRecyclerViewTouchListener.SwipeListener() {
+                            @Override
+                            public boolean canSwipeLeft(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public boolean canSwipeRight(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    testData.remove(position);
+                                    cdAdapter.notifyItemRemoved(position);
+                                }
+                                cdAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    testData.remove(position);
+                                    cdAdapter.notifyItemRemoved(position);
+                                }
+                                cdAdapter.notifyDataSetChanged();
+                            }
+                        });
+
+        rv.addOnItemTouchListener(swipeTouchListener);
+
         return view;
-    }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     public List<CardsData> testData() {
-        List<CardsData> testData = new ArrayList<>();
+          testData = new ArrayList<>();
         return testData;
     }
 
     public void refreshAdapter(){
-        cdAdapter.notifyDataSetChanged();
+        counter++;
+        testData.add(new CardsData("Simple item " + counter));
+        cdAdapter.setData(testData);
+        cdAdapter.notifyItemInserted(testData.size());
         }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

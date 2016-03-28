@@ -1,55 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
-    android:layout_marginRight="12dp"
-    android:layout_marginLeft="12dp"
-    >
+              xmlns:card="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="5dp"
+              android:layout_marginRight="8dp"
+              android:layout_marginLeft="8dp"
+>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card:cardElevation="2dp"
-        card:cardUseCompatPadding="true">
-
-        <LinearLayout
+            android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_gravity="center_vertical"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_timer_auto_24dp"
+            card:cardCornerRadius="3dp"
+            card:cardElevation="2dp"
+            card:cardUseCompatPadding="true">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="150dp"
+                       android:src="@drawable/tumblr"
+                       android:scaleType="centerCrop"/>
+
+            <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                     android:orientation="horizontal" >
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="16dp"
+                        android:id="@+id/title"/>
+
+                <TextView/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Test information"
+                        android:textSize="14sp"
+                        android:paddingBottom="16dp"
+                        android:paddingLeft="16dp" />
+
+                <TextClock android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginRight="16dp"
+                           android:paddingBottom="16dp"
+                           android:layout_gravity="bottom|right"
+                           android:textSize="14sp"
+                    android:textColor="@color/md_grey_700"
                 />
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:paddingTop="5dp"
-                android:paddingLeft="5dp"
-                android:id="@+id/title"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Test information"
-                android:textSize="15dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="5dp" />
-</LinearLayout>
+            </GridLayout>
 
         </LinearLayout>
-
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
