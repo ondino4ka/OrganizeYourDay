@@ -39,9 +39,6 @@ public class SettingsFragment extends PreferenceFragment{
 
             }
 
-
-
-
             return true;
 
         }
@@ -54,9 +51,6 @@ public class SettingsFragment extends PreferenceFragment{
                     PreferenceManager
                             .getDefaultSharedPreferences(preference.getContext())
                             .getString(preference.getKey(), ""));
-
-
-
         }
 
 
