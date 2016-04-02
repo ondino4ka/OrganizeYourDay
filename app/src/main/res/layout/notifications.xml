@@ -10,4 +10,12 @@
         android:id="@+id/button2"
         android:layout_gravity="center_horizontal"
         android:onClick="showNotifications"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DataBaseTest"
+        android:id="@+id/button"
+        android:layout_gravity="center_horizontal"
+        android:onClick="openlayout"/>
 </LinearLayout>

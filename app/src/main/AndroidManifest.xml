@@ -39,6 +39,10 @@ package="com.dreamteam.organizeyourday">
     <activity android:name=".TimeNotification"
         android:label="TimeNotifications">
     </activity>
+    <activity android:name=".DataBaseTest"
+        android:label="DataBase">
+
+    </activity>
     <receiver android:name=".Notifications"/>
 
 
