@@ -18,8 +18,8 @@ import com.dreamteam.organizeyourday.R;
 
 public class DataBaseTest extends AppCompatActivity implements View.OnClickListener{
 
-    Button bdAdd, bdRead, bdClear;
-    EditText etName, etDescription, etPriority;
+    Button bdAdd, bdRead, bdClear, bdSort, bdSearch;
+    EditText etName, etDescription, etPriority, etSearch;
 
     DatabaseHelper databaseHelper;
 
@@ -37,9 +37,16 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
         bdClear = (Button) findViewById(R.id.bdClear);
         bdClear.setOnClickListener(this);
 
+        bdSort = (Button) findViewById(R.id.bdSort);
+        bdSort.setOnClickListener(this);
+
+        bdSearch = (Button) findViewById(R.id.bdSearch);
+        bdSearch.setOnClickListener(this);
+
         etName = (EditText) findViewById(R.id.etName);
         etDescription = (EditText) findViewById(R.id.etDescription);
         etPriority =(EditText) findViewById(R.id.etPriority);
+        etSearch = (EditText) findViewById(R.id.etSearch);
 
         databaseHelper = new DatabaseHelper(this);
     }
@@ -50,10 +57,11 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
         String name = etName.getText().toString();
         String description = etDescription.getText().toString();
         String priority = etPriority.getText().toString();
+        String search = etSearch.getText().toString();
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-
+        String[] selectionArgs = null;
 
         switch (v.getId()) {
 
@@ -64,8 +72,10 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
                 database.insert(DatabaseHelper.TABLE_CONTACTS, null, contentValues);
                 break;
 
+            //Cursor cursor = database.query(DatabaseHelper.TABLE_CONTACTS, null, null, null, null, null, "reminders_headline, priority");
             case R.id.bdRead:
-                Cursor cursor = database.query(DatabaseHelper.TABLE_CONTACTS, null, null, null, null, null, null, null);
+
+                Cursor cursor = database.query(DatabaseHelper.TABLE_CONTACTS, null, null, null, null, null, null);
 
                 if (cursor.moveToFirst()) {
                     int idIndex = cursor.getColumnIndex(DatabaseHelper.ID_COLUMN);
@@ -84,6 +94,58 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
 
                 cursor.close();
                 break;
+
+            case R.id.bdSearch:
+                selectionArgs = new String[] { search };
+                Cursor cursor1 = database.query(DatabaseHelper.TABLE_CONTACTS, null, "reminders_headline = ?", selectionArgs, null, null, null);
+
+                if (cursor1.moveToFirst()) {
+                    int idIndex = cursor1.getColumnIndex(DatabaseHelper.ID_COLUMN);
+                    int nameIndex = cursor1.getColumnIndex(DatabaseHelper.REMINDERS_NAME_COLUMN);
+                    int descriptionIndex = cursor1.getColumnIndex(DatabaseHelper.DESCRIPTION_COLUMN);
+                    int priorityIndex = cursor1.getColumnIndex(DatabaseHelper.PRIORITY_COLUMN);
+                    do {
+                        Log.d("mLog", "ID = " + cursor1.getInt(idIndex) +
+                                ", name = " + cursor1.getString(nameIndex) +
+                                ", description = " + cursor1.getString(descriptionIndex) +
+                                ", priority = " + cursor1.getString(priorityIndex));
+
+                    } while (cursor1.moveToNext());
+                } else
+                    Log.d("mLog","0 rows");
+
+                cursor1.close();
+                break;
+
+
+
+            case R.id.bdSort:
+
+                Cursor cursor2 = database.query(DatabaseHelper.TABLE_CONTACTS, null, null, null, null, null, "reminders_headline, priority");
+
+                if (cursor2.moveToFirst()) {
+                    int idIndex = cursor2.getColumnIndex(DatabaseHelper.ID_COLUMN);
+                    int nameIndex = cursor2.getColumnIndex(DatabaseHelper.REMINDERS_NAME_COLUMN);
+                    int descriptionIndex = cursor2.getColumnIndex(DatabaseHelper.DESCRIPTION_COLUMN);
+                    int priorityIndex = cursor2.getColumnIndex(DatabaseHelper.PRIORITY_COLUMN);
+                    do {
+                        Log.d("mLog", "ID = " + cursor2.getInt(idIndex) +
+                                ", name = " + cursor2.getString(nameIndex) +
+                                ", description = " + cursor2.getString(descriptionIndex) +
+                                ", priority = " + cursor2.getString(priorityIndex));
+
+                    } while (cursor2.moveToNext());
+                } else
+                    Log.d("mLog","0 rows");
+
+                cursor2.close();
+                break;
+
+
+
+
+
+
 
             case R.id.bdClear:
                 database.delete(DatabaseHelper.TABLE_CONTACTS, null, null);
