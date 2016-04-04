@@ -1,4 +1,4 @@
-package com.dreamteam.organizeyourday;
+package com.dreamteam.organizeyourday.DataBase;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,7 +25,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-
     public void onCreate(SQLiteDatabase db) {
 
         String query = "create table " + TABLE_CONTACTS + " (" +

@@ -3,6 +3,7 @@
 package="com.dreamteam.organizeyourday">
 
 <application
+    android:name=".ContextContainer"
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
@@ -39,7 +40,7 @@ package="com.dreamteam.organizeyourday">
     <activity android:name=".TimeNotification"
         android:label="TimeNotifications">
     </activity>
-    <activity android:name=".DataBaseTest"
+    <activity android:name=".DataBase.DataBaseTest"
         android:label="DataBase">
 
     </activity>

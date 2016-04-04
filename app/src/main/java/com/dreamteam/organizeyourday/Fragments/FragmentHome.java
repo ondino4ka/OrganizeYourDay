@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.view.animation.Animation;
+
+import com.dreamteam.organizeyourday.DataBase.DataBase;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.adapter.CardListAdapter;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
@@ -30,6 +32,7 @@ public class FragmentHome extends android.app.Fragment {
     private Context context;
     int counter =0;
     private View view;
+    DataBase data;
     private CardListAdapter cdAdapter;
     List<CardsData> testData;
 
@@ -80,6 +83,7 @@ public class FragmentHome extends android.app.Fragment {
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
                                     testData.remove(position);
+                                    data.removeCardInformation(testData.get(position).getTitle());
                                     cdAdapter.notifyItemRemoved(position);
                                 }
                                 cdAdapter.notifyDataSetChanged();
@@ -102,7 +106,8 @@ public class FragmentHome extends android.app.Fragment {
     }
 
     public List<CardsData> testData() {
-          testData = new ArrayList<>();
+        data = new DataBase();
+        testData = data.getListOfDataBaseComponent();
         return testData;
     }
 

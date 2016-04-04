@@ -1,4 +1,4 @@
-package com.dreamteam.organizeyourday;
+package com.dreamteam.organizeyourday.DataBase;
 
 /**
  * Created by kostya on 27.03.2016.
@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.dreamteam.organizeyourday.R;
 
 
 public class DataBaseTest extends AppCompatActivity implements View.OnClickListener{
@@ -88,6 +89,6 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
                 database.delete(DatabaseHelper.TABLE_CONTACTS, null, null);
                 break;
         }
-        databaseHelper.close();
+       // databaseHelper.close();
     }
 }

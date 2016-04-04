@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.dreamteam.organizeyourday.DataBase.DataBaseTest;
+
 
 public class TimeNotification extends AppCompatActivity {
 
