@@ -56,10 +56,11 @@ public class FragmentHome extends android.app.Fragment {
         RecyclerView.ItemAnimator animation = new DefaultItemAnimator();
         rv.setLayoutManager(new LinearLayoutManager(context));
         rv.setItemAnimator(animation);
-        context = ContextContainer.getContainer();
+        context = ContextContainer.getContext();
         db = new DatabaseHelper(context);
         cdAdapter = new CardListAdapter(db.getListOfDataBaseComponent());
         rv.setAdapter(cdAdapter);
+        
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(rv,
                         new SwipeableRecyclerViewTouchListener.SwipeListener() {
@@ -92,7 +93,6 @@ public class FragmentHome extends android.app.Fragment {
                         });
 
         rv.addOnItemTouchListener(swipeTouchListener);
-
         return view;
 
     }

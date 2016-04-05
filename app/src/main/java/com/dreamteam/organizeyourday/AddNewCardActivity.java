@@ -22,14 +22,14 @@ public class AddNewCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_card);
         final TextInputEditText titleText = (TextInputEditText)findViewById(R.id.inputTitleText);
-        TextInputEditText descriptionText = (TextInputEditText)findViewById(R.id.inputDescriptionText);
+        TextInputEditText descriptionText = (TextInputEditText)findViewById(R.id.inputTextDescription);
         Button addButton = (Button)findViewById(R.id.addButton);
 
         Button cancelButton = (Button)findViewById(R.id.cancel_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseHelper db = new DatabaseHelper(ContextContainer.getContainer());
+                DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
                 db.addCard(titleText.getText().toString());
                 onBackPressed();
             }

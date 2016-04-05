@@ -12,7 +12,7 @@ public class ContextContainer extends Application {
         container = this;
     }
 
-    public static ContextContainer getContainer() {
+    public static ContextContainer getContext() {
         return container;
     }
 }

@@ -41,7 +41,9 @@
 
         <receiver android:name=".Notifications" />
 
-        <activity android:name=".AddNewCardActivity"></activity>
+        <activity android:name=".AddNewCardActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
     </application>
 
 </manifest>

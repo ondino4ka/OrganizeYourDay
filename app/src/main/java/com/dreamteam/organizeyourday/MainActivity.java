@@ -121,8 +121,6 @@ public class MainActivity extends AppCompatActivity
                 //ftrans.replace(R.id.container, share);
                 break;
             case R.id.sorting:
-                DatabaseHelper db = new DatabaseHelper(ContextContainer.getContainer());
-                home.refreshAdapter();
                 break;
             case R.id.about:
                 intent = new Intent(MainActivity.this, AboutActivity.class);
