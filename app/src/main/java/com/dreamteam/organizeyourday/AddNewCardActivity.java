@@ -21,6 +21,7 @@ public class AddNewCardActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeManager.setCurrentTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_card);
         final TextInputEditText titleText = (TextInputEditText)findViewById(R.id.inputTitleText);

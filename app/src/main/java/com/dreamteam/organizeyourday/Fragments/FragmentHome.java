@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.dreamteam.organizeyourday.ContextContainer;
 import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
@@ -52,8 +54,53 @@ public class FragmentHome extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
+
         RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
-        RecyclerView.ItemAnimator animation = new DefaultItemAnimator();
+        final Animation translateAnim  = AnimationUtils.loadAnimation(view.getContext(), R.anim.right_translate);
+        final RecyclerView.ItemAnimator animation = new RecyclerView.ItemAnimator() {
+            @Override
+            public boolean animateDisappearance(RecyclerView.ViewHolder viewHolder, ItemHolderInfo preLayoutInfo, ItemHolderInfo postLayoutInfo) {
+                return false;
+            }
+
+            @Override
+            public boolean animateAppearance(RecyclerView.ViewHolder viewHolder, ItemHolderInfo preLayoutInfo, ItemHolderInfo postLayoutInfo) {
+                viewHolder.itemView.startAnimation(translateAnim);
+                return true;
+            }
+
+            @Override
+            public boolean animatePersistence(RecyclerView.ViewHolder viewHolder, ItemHolderInfo preLayoutInfo, ItemHolderInfo postLayoutInfo) {
+                return false;
+            }
+
+            @Override
+            public boolean animateChange(RecyclerView.ViewHolder oldHolder, RecyclerView.ViewHolder newHolder, ItemHolderInfo preLayoutInfo, ItemHolderInfo postLayoutInfo) {
+                return false;
+            }
+
+            @Override
+            public void runPendingAnimations() {
+
+            }
+
+            @Override
+            public void endAnimation(RecyclerView.ViewHolder item) {
+
+            }
+
+            @Override
+            public void endAnimations() {
+
+            }
+
+            @Override
+            public boolean isRunning() {
+                return false;
+            }
+        };
+        animation.runPendingAnimations();
+
         rv.setLayoutManager(new LinearLayoutManager(context));
         rv.setItemAnimator(animation);
         context = ContextContainer.getContext();
