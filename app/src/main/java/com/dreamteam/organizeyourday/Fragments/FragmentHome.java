@@ -15,7 +15,10 @@ import com.dreamteam.organizeyourday.ContextContainer;
 import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.adapter.CardListAdapter;
+import com.dreamteam.organizeyourday.dataOfCards.CardsData;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
+
+import java.util.List;
 
 public class FragmentHome extends android.app.Fragment {
 
@@ -134,8 +137,11 @@ public class FragmentHome extends android.app.Fragment {
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-
+                                    db.removeCardInformation(CardListAdapter.getData().get(position).getID());
+                                    CardListAdapter.getData().remove(position);
+                                    cdAdapter.notifyItemRemoved(position);
                                 }
+                                cdAdapter.notifyDataSetChanged();
                             }
                         });
 
@@ -148,4 +154,9 @@ public class FragmentHome extends android.app.Fragment {
         cdAdapter.setData(db.getListOfDataBaseComponent());
         cdAdapter.notifyItemChanged(CardListAdapter.getData().size());
         }
+
+    public void refreshAdapter(List<CardsData> data){
+        cdAdapter.setData(data);
+        cdAdapter.notifyDataSetChanged();
+    }
 }

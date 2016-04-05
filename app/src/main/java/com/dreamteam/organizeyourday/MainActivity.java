@@ -46,9 +46,6 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddNewCardActivity.class);
                 startActivity(intent);
-                //DatabaseHelper db = new DatabaseHelper(ContextContainer.getContainer());
-                //db.addCard("test title" + counter++);
-               // home.refreshAdapter();
             }
         });
 
@@ -121,6 +118,8 @@ public class MainActivity extends AppCompatActivity
                 //ftrans.replace(R.id.container, share);
                 break;
             case R.id.sorting:
+                DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
+                home.refreshAdapter(db.searchCards());
                 break;
             case R.id.about:
                 intent = new Intent(MainActivity.this, AboutActivity.class);
@@ -153,6 +152,7 @@ ftrans.commit();
     protected void onResume() {
         super.onResume();
         home.refreshAdapter();
+        fab.show();
     }
 
     public void jumpToAccount(View view) {
