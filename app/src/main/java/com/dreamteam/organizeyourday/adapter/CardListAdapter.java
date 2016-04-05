@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.dreamteam.organizeyourday.ContextContainer;
 import com.dreamteam.organizeyourday.EditCardActivity;
+import com.dreamteam.organizeyourday.MainActivity;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
 
@@ -38,7 +40,10 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), EditCardActivity.class);
                 intent.putExtra("title", holder.title.getText().toString());
-                v.getContext().startActivity(intent);
+
+                Activity activity = (Activity) v.getContext();
+                activity.startActivityForResult(intent,Activity.RESULT_OK);
+                activity.overridePendingTransition(R.anim.scale_by_y, R.anim.alpha_out);
             }
         });
     }

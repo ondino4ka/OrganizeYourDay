@@ -7,11 +7,15 @@ import android.view.View;
 import android.widget.Button;
 
 import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
-import com.dreamteam.organizeyourday.Fragments.FragmentHome;
 
 public class AddNewCardActivity extends AppCompatActivity {
 
 
+    @Override
+    protected void onPause(){
+        super.onPause();
+        overridePendingTransition(R.anim.alpha_in, R.anim.to_down_translate);
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

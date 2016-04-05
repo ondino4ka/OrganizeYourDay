@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.dreamteam.organizeyourday.R;
+import com.dreamteam.organizeyourday.ThemeManager;
 
 
 public class DataBaseTest extends AppCompatActivity implements View.OnClickListener{
@@ -25,6 +26,7 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeManager.setCurrentTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.data_base_test);
 

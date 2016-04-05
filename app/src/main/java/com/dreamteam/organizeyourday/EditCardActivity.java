@@ -8,6 +8,15 @@ import android.widget.TextView;
 public class EditCardActivity extends AppCompatActivity {
 
     @Override
+    protected void onPause(){
+        super.onPause();
+        overridePendingTransition(R.anim.alpha_in, R.anim.scale_by_y_reverse);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         ThemeManager.setCurrentTheme(this);

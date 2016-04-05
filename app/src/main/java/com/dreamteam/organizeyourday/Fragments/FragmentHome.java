@@ -21,7 +21,8 @@ public class FragmentHome extends android.app.Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private Animation translateAnim;
+    private RecyclerView.ItemAnimator animation;
     private String mParam1;
     private String mParam2;
 
@@ -41,6 +42,8 @@ public class FragmentHome extends android.app.Fragment {
         return fragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,16 +51,14 @@ public class FragmentHome extends android.app.Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
-        final Animation translateAnim  = AnimationUtils.loadAnimation(view.getContext(), R.anim.right_translate);
-        final RecyclerView.ItemAnimator animation = new RecyclerView.ItemAnimator() {
+    private void setAnimator(android.view.View view)
+    {
+        translateAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.right_translate);
+        animation = new RecyclerView.ItemAnimator() {
             @Override
             public boolean animateDisappearance(RecyclerView.ViewHolder viewHolder, ItemHolderInfo preLayoutInfo, ItemHolderInfo postLayoutInfo) {
                 return false;
@@ -99,6 +100,15 @@ public class FragmentHome extends android.app.Fragment {
                 return false;
             }
         };
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_home, container, false);
+        setAnimator(view);
+
+        RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
         animation.runPendingAnimations();
 
         rv.setLayoutManager(new LinearLayoutManager(context));

@@ -1,10 +1,10 @@
 package com.dreamteam.organizeyourday;
 
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,10 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
 import com.dreamteam.organizeyourday.Fragments.FragmentHome;
 import com.dreamteam.organizeyourday.Fragments.FragmentShare;
-import com.dreamteam.organizeyourday.adapter.CardListAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,10 +43,12 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddNewCardActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, RESULT_OK);
+                overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
+
                 //DatabaseHelper db = new DatabaseHelper(ContextContainer.getContainer());
                 //db.addCard("test title" + counter++);
-               // home.refreshAdapter();
+                // home.refreshAdapter();
             }
         });
 
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity
 
         share = new FragmentShare();
         home = new FragmentHome();
+
         FragmentTransaction ft = getFragmentManager().beginTransaction().add(R.id.container, home);
         if (isFirstStart) {
             isFirstStart = false;
@@ -124,16 +125,19 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.about:
                 intent = new Intent(MainActivity.this, AboutActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, RESULT_OK);
+                overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
                 break;
             case R.id.settings:
                 intent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,RESULT_OK);
+                overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
                 break;
             case R.id.notifications:
                 fab.hide();
                 intent = new Intent(MainActivity.this, TimeNotification.class);
-                startActivity(intent);
+                startActivityForResult(intent,RESULT_OK);
+                overridePendingTransition(R.anim.rotate_anim, R.anim.alpha_out);
                 break;
         }
 ftrans.commit();
@@ -142,6 +146,8 @@ ftrans.commit();
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
     @Override
         public boolean onCreateOptionsMenu(Menu menu) {
@@ -156,7 +162,14 @@ ftrans.commit();
     }
 
     public void jumpToAccount(View view) {
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
         Intent intent = new Intent(MainActivity.this, Account.class);
-        startActivity(intent);
+        startActivityForResult(intent,RESULT_OK);
+        overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
     }
+
 }

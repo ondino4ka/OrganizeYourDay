@@ -14,7 +14,15 @@ public class TimeNotification extends AppCompatActivity {
 
 
     private AlarmManager am;
-
+    @Override
+    protected void onPause(){
+        super.onPause();
+        overridePendingTransition(R.anim.alpha_in, R.anim.rotate_reverse_anim);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeManager.setCurrentTheme(this);

@@ -75,6 +75,8 @@ public class SettingsFragment extends PreferenceFragment{
 
     }
 
+
+
     private void jumpToMainIntent(Intent intent)
     {
         startActivity(intent);
