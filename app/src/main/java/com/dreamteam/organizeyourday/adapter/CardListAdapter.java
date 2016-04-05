@@ -3,7 +3,6 @@ package com.dreamteam.organizeyourday.adapter;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +34,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     @Override
     public void onBindViewHolder(final CardViewHolder holder, int position) {
         holder.title.setText(data.get(position).getTitle());
+        holder.description.setText(data.get(position).getDescription());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +55,6 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
     public void setData(List<CardsData> data){
         this.data = data;
-
     }
 
     public static List<CardsData> getData() {
@@ -66,11 +65,13 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
         CardView card;
         TextView title;
+        TextView description;
 
         public CardViewHolder(final View itemView) {
             super(itemView);
             card = (CardView)itemView.findViewById(R.id.card);
             title = (TextView)itemView.findViewById(R.id.title);
+            description = (TextView)itemView.findViewById(R.id.cardDescription);
         }
     }
 

@@ -1,8 +1,6 @@
 package com.dreamteam.organizeyourday.DataBase;
 
-/**
- * Created by kostya on 27.03.2016.
- */
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -140,12 +138,6 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
 
                 cursor2.close();
                 break;
-
-
-
-
-
-
 
             case R.id.bdClear:
                 database.delete(DatabaseHelper.TABLE_CONTACTS, null, null);
