@@ -38,4 +38,11 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="Priority">
+        <item>low</item>
+        <item>not low</item>
+        <item>medium</item>
+        <item>ultra</item>
+        <item>nightmare</item>
+    </string-array>
 </resources>

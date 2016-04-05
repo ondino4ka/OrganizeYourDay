@@ -3,18 +3,26 @@ package com.dreamteam.organizeyourday;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.dreamteam.organizeyourday.DataBase.DataBaseTest;
 
 
 public class TimeNotification extends AppCompatActivity {
 
 
     private AlarmManager am;
-
+    @Override
+    protected void onPause(){
+        super.onPause();
+        overridePendingTransition(R.anim.alpha_in, R.anim.rotate_reverse_anim);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeManager.setCurrentTheme(this);
@@ -32,5 +40,11 @@ public class TimeNotification extends AppCompatActivity {
         am.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pendingIntent);
     }
 
+//для базы данных
+    public void openlayout(View view) {
+        Intent intent;
+        intent = new Intent(TimeNotification.this, DataBaseTest.class);
+        startActivity(intent);
 
+    }
 }

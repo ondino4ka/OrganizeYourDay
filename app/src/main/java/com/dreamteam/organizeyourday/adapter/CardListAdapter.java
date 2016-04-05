@@ -1,5 +1,6 @@
 package com.dreamteam.organizeyourday.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.dreamteam.organizeyourday.ContextContainer;
+import com.dreamteam.organizeyourday.EditCardActivity;
+import com.dreamteam.organizeyourday.MainActivity;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
 
@@ -28,8 +32,20 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     }
 
     @Override
-    public void onBindViewHolder(CardViewHolder holder, int position) {
+    public void onBindViewHolder(final CardViewHolder holder, int position) {
         holder.title.setText(data.get(position).getTitle());
+        holder.description.setText(data.get(position).getDescription());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), EditCardActivity.class);
+                intent.putExtra("title", holder.title.getText().toString());
+
+                Activity activity = (Activity) v.getContext();
+                activity.startActivityForResult(intent,Activity.RESULT_OK);
+                activity.overridePendingTransition(R.anim.scale_by_y, R.anim.alpha_out);
+            }
+        });
     }
 
     @Override
@@ -37,19 +53,25 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         return data.size();
     }
 
-    public static void addCard() {
-        data.add(new CardsData("Test card"));
+    public void setData(List<CardsData> data){
+        this.data = data;
+    }
+
+    public static List<CardsData> getData() {
+        return data;
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder{
 
         CardView card;
         TextView title;
+        TextView description;
 
-        public CardViewHolder(View itemView) {
+        public CardViewHolder(final View itemView) {
             super(itemView);
             card = (CardView)itemView.findViewById(R.id.card);
             title = (TextView)itemView.findViewById(R.id.title);
+            description = (TextView)itemView.findViewById(R.id.cardDescription);
         }
     }
 

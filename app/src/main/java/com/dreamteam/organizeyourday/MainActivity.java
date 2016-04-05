@@ -1,5 +1,6 @@
 package com.dreamteam.organizeyourday;
 
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import android.view.MenuItem;
 
 import com.dreamteam.organizeyourday.Fragments.FragmentHome;
 import com.dreamteam.organizeyourday.Fragments.FragmentShare;
-import com.dreamteam.organizeyourday.adapter.CardListAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     FragmentShare share;
     FragmentHome home;
     FloatingActionButton fab;
+    int counter =0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +38,17 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CardListAdapter.addCard();
-                home.refreshAdapter();
+                Intent intent = new Intent(MainActivity.this, AddNewCardActivity.class);
+                startActivityForResult(intent, RESULT_OK);
+                overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
+
+                //DatabaseHelper db = new DatabaseHelper(ContextContainer.getContainer());
+                //db.addCard("test title" + counter++);
+                // home.refreshAdapter();
             }
         });
 
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity
 
         share = new FragmentShare();
         home = new FragmentHome();
+
         FragmentTransaction ft = getFragmentManager().beginTransaction().add(R.id.container, home);
         if (isFirstStart) {
             isFirstStart = false;
@@ -68,6 +74,7 @@ public class MainActivity extends AppCompatActivity
             ft.commit();
         }
     }
+
 
     @Override
     protected void onRestart() {
@@ -114,18 +121,23 @@ public class MainActivity extends AppCompatActivity
                 ftrans.show(share);
                 //ftrans.replace(R.id.container, share);
                 break;
+            case R.id.sorting:
+                break;
             case R.id.about:
                 intent = new Intent(MainActivity.this, AboutActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, RESULT_OK);
+                overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
                 break;
             case R.id.settings:
                 intent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,RESULT_OK);
+                overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
                 break;
             case R.id.notifications:
                 fab.hide();
                 intent = new Intent(MainActivity.this, TimeNotification.class);
-                startActivity(intent);
+                startActivityForResult(intent,RESULT_OK);
+                overridePendingTransition(R.anim.rotate_anim, R.anim.alpha_out);
                 break;
         }
 ftrans.commit();
@@ -135,14 +147,29 @@ ftrans.commit();
         return true;
     }
 
+
+
     @Override
         public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
 
-    public void jumpToAccount(View view) {
-        Intent intent = new Intent(MainActivity.this, Account.class);
-        startActivity(intent);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        home.refreshAdapter();
     }
+
+    public void jumpToAccount(View view) {
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        Intent intent = new Intent(MainActivity.this, Account.class);
+        startActivityForResult(intent,RESULT_OK);
+        overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
+    }
+
 }
