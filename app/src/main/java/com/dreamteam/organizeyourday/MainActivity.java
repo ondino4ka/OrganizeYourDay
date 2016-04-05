@@ -4,6 +4,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
 import com.dreamteam.organizeyourday.Fragments.FragmentHome;
 import com.dreamteam.organizeyourday.Fragments.FragmentShare;
 import com.dreamteam.organizeyourday.adapter.CardListAdapter;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity
     FragmentShare share;
     FragmentHome home;
     FloatingActionButton fab;
+    int counter =0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,11 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                home.refreshAdapter();
+                Intent intent = new Intent(MainActivity.this, AddNewCardActivity.class);
+                startActivity(intent);
+                //DatabaseHelper db = new DatabaseHelper(ContextContainer.getContainer());
+                //db.addCard("test title" + counter++);
+               // home.refreshAdapter();
             }
         });
 
@@ -113,6 +120,10 @@ public class MainActivity extends AppCompatActivity
                 ftrans.show(share);
                 //ftrans.replace(R.id.container, share);
                 break;
+            case R.id.sorting:
+                DatabaseHelper db = new DatabaseHelper(ContextContainer.getContainer());
+                home.refreshAdapter();
+                break;
             case R.id.about:
                 intent = new Intent(MainActivity.this, AboutActivity.class);
                 startActivity(intent);
@@ -138,6 +149,12 @@ ftrans.commit();
         public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        home.refreshAdapter();
     }
 
     public void jumpToAccount(View view) {

@@ -18,5 +18,4 @@ public class EditCardActivity extends AppCompatActivity {
         titleText.setText(intent.getStringExtra("title"));
     }
 
-
 }

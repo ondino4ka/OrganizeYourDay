@@ -87,11 +87,9 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
                                 ", name = " + cursor.getString(nameIndex) +
                                 ", description = " + cursor.getString(descriptionIndex) +
                                 ", priority = " + cursor.getString(priorityIndex));
-
                     } while (cursor.moveToNext());
                 } else
                     Log.d("mLog","0 rows");
-
                 cursor.close();
                 break;
 

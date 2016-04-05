@@ -53,6 +53,10 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
     }
 
+    public static List<CardsData> getData() {
+        return data;
+    }
+
     public static class CardViewHolder extends RecyclerView.ViewHolder{
 
         CardView card;

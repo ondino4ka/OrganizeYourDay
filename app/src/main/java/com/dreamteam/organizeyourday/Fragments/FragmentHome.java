@@ -1,7 +1,6 @@
 package com.dreamteam.organizeyourday.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,16 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.view.animation.Animation;
-
-import com.dreamteam.organizeyourday.DataBase.DataBase;
+import com.dreamteam.organizeyourday.ContextContainer;
+import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.adapter.CardListAdapter;
-import com.dreamteam.organizeyourday.dataOfCards.CardsData;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FragmentHome extends android.app.Fragment {
 
@@ -32,9 +26,8 @@ public class FragmentHome extends android.app.Fragment {
     private Context context;
     int counter =0;
     private View view;
-    DataBase data;
+    DatabaseHelper db;
     private CardListAdapter cdAdapter;
-    List<CardsData> testData;
 
 
     public static FragmentHome getInstance(String param1, String param2) {
@@ -63,9 +56,10 @@ public class FragmentHome extends android.app.Fragment {
         RecyclerView.ItemAnimator animation = new DefaultItemAnimator();
         rv.setLayoutManager(new LinearLayoutManager(context));
         rv.setItemAnimator(animation);
-        cdAdapter = new CardListAdapter(testData());
+        context = ContextContainer.getContainer();
+        db = new DatabaseHelper(context);
+        cdAdapter = new CardListAdapter(db.getListOfDataBaseComponent());
         rv.setAdapter(cdAdapter);
-
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(rv,
                         new SwipeableRecyclerViewTouchListener.SwipeListener() {
@@ -76,14 +70,14 @@ public class FragmentHome extends android.app.Fragment {
 
                             @Override
                             public boolean canSwipeRight(int position) {
-                                return true;
+                                return false;
                             }
 
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    testData.remove(position);
-                                    data.removeCardInformation(testData.get(position).getTitle());
+                                    db.removeCardInformation(CardListAdapter.getData().get(position).getID());
+                                    CardListAdapter.getData().remove(position);
                                     cdAdapter.notifyItemRemoved(position);
                                 }
                                 cdAdapter.notifyDataSetChanged();
@@ -92,10 +86,8 @@ public class FragmentHome extends android.app.Fragment {
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    testData.remove(position);
-                                    cdAdapter.notifyItemRemoved(position);
+
                                 }
-                                cdAdapter.notifyDataSetChanged();
                             }
                         });
 
@@ -105,16 +97,8 @@ public class FragmentHome extends android.app.Fragment {
 
     }
 
-    public List<CardsData> testData() {
-        data = new DataBase();
-        testData = data.getListOfDataBaseComponent();
-        return testData;
-    }
-
     public void refreshAdapter(){
-        counter++;
-        testData.add(new CardsData("Simple item " + counter));
-        cdAdapter.setData(testData);
-        cdAdapter.notifyItemInserted(testData.size());
+        cdAdapter.setData(db.getListOfDataBaseComponent());
+        cdAdapter.notifyItemChanged(CardListAdapter.getData().size());
         }
 }

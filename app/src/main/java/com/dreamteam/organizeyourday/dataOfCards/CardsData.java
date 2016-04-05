@@ -1,12 +1,12 @@
 package com.dreamteam.organizeyourday.dataOfCards;
 
-import org.w3c.dom.Text;
-
 public class CardsData {
     private String title ;
+    private final int ID;
 
-    public  CardsData(String title){
+    public  CardsData(int ID,String title){
         this.title = title;
+        this.ID = ID;
     }
 
     public String getTitle() {
@@ -15,5 +15,9 @@ public class CardsData {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getID() {
+        return ID;
     }
 }
