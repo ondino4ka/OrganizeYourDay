@@ -39,10 +39,10 @@
     </string-array>
 
     <string-array name="Priority">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
+        <item>low</item>
+        <item>not low</item>
+        <item>medium</item>
+        <item>ultra</item>
+        <item>nightmare</item>
     </string-array>
 </resources>

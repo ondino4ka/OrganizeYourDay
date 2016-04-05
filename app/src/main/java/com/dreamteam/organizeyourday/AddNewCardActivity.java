@@ -3,8 +3,10 @@ package com.dreamteam.organizeyourday;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
 import com.dreamteam.organizeyourday.Fragments.FragmentHome;
@@ -29,6 +31,10 @@ public class AddNewCardActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (titleText.getText().toString().equals("")){
+                    notifyMe();
+                    return;
+                }
                 DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
                 db.addCard(titleText.getText().toString());
                 onBackPressed();
@@ -41,5 +47,10 @@ cancelButton.setOnClickListener(new View.OnClickListener() {
         onBackPressed();
     }
 });
+    }
+
+    void notifyMe(){
+        Toast toast = Toast.makeText(this, "Write title name!",Toast.LENGTH_SHORT);
+        toast.show();
     }
 }
