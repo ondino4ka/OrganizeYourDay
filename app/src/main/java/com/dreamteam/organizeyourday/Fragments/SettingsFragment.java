@@ -1,5 +1,6 @@
 package com.dreamteam.organizeyourday.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -12,9 +13,10 @@ import com.dreamteam.organizeyourday.ThemeManager;
 public class SettingsFragment extends PreferenceFragment{
 
 
+    private boolean isFirstStart= true;
 
 
-    private static  Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener
+    private  Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener
             = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
@@ -38,31 +40,44 @@ public class SettingsFragment extends PreferenceFragment{
                                 : null);
 
             }
-
+            if(MainActivity.isCurrentThemeChanged && !isFirstStart)
+            {
+                jumpToMainIntent(new Intent(preference.getContext(), MainActivity.class));
+                return true;
+            }
             return true;
 
         }
     };
 
-        private static void bindPreferenceSummaryToValue(Preference preference) {
-            preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
+    private void bindPreferenceSummaryToValue(Preference preference) {
+        preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 
-            sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                    PreferenceManager
-                            .getDefaultSharedPreferences(preference.getContext())
-                            .getString(preference.getKey(), ""));
-        }
+        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
+                PreferenceManager
+                        .getDefaultSharedPreferences(preference.getContext())
+                        .getString(preference.getKey(), ""));
+
+
+
+    }
 
 
     @Override
-    public  void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         setHasOptionsMenu(true);
         bindPreferenceSummaryToValue(findPreference("pref_themes_list"));
+        isFirstStart = false;
+
 
     }
 
+    private void jumpToMainIntent(Intent intent)
+    {
+        startActivity(intent);
+    }
 
 }
