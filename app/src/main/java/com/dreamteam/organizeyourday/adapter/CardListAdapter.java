@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.dreamteam.organizeyourday.ContextContainer;
@@ -21,7 +23,6 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
 
     private static List<CardsData> data;
-
     public CardListAdapter(List<CardsData> data) {
         this.data = data;
     }
@@ -43,7 +44,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
                 intent.putExtra("title", holder.title.getText().toString());
 
                 Activity activity = (Activity) v.getContext();
-                activity.startActivityForResult(intent,Activity.RESULT_OK);
+                activity.startActivityForResult(intent, Activity.RESULT_OK);
                 activity.overridePendingTransition(R.anim.scale_by_y, R.anim.alpha_out);
             }
         });
@@ -68,12 +69,14 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         TextView title;
         TextView description;
 
+
         public CardViewHolder(final View itemView) {
             super(itemView);
             card = (CardView)itemView.findViewById(R.id.card);
             title = (TextView)itemView.findViewById(R.id.title);
             description = (TextView)itemView.findViewById(R.id.cardDescription);
         }
+
     }
 
 }

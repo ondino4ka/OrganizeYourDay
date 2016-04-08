@@ -22,6 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
 import com.dreamteam.organizeyourday.Fragments.FragmentHome;
 import com.dreamteam.organizeyourday.Fragments.FragmentShare;
 
@@ -67,6 +68,9 @@ public class MainActivity extends AppCompatActivity
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -138,7 +142,12 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ftrans= getFragmentManager().beginTransaction();
         Intent intent;
         switch (id){
+            case R.id.home:
+                fab.show();
+                break;
             case R.id.sorting:
+                DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
+                home.refreshAdapter(db.searchCards());
                 break;
             case R.id.about:
                 intent = new Intent(MainActivity.this, AboutActivity.class);
