@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,7 +112,7 @@ public class FragmentHome extends android.support.v4.app.Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         setAnimator(view);
 
-        RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
+        final RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
         animation.runPendingAnimations();
 
        rv.setLayoutManager(new LinearLayoutManager(context));rv.setItemAnimator(animation);
@@ -119,42 +120,28 @@ public class FragmentHome extends android.support.v4.app.Fragment {
         db = new DatabaseHelper(context);
        cdAdapter = new CardListAdapter(db.getListOfDataBaseComponent());
        rv.setAdapter(cdAdapter);
-        
-        SwipeableRecyclerViewTouchListener swipeTouchListener =
-                new SwipeableRecyclerViewTouchListener(rv,
-                        new SwipeableRecyclerViewTouchListener.SwipeListener() {
-                            @Override
-                            public boolean canSwipeLeft(int position) {
-                                return false;
-                            }
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 
-                            @Override
-                            public boolean canSwipeRight(int position) {
-                                return true;
-                            }
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
 
-                            @Override
-                            public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    db.removeCardInformation(CardListAdapter.getData().get(position).getID());
-                                    CardListAdapter.getData().remove(position);
-                                    cdAdapter.notifyItemRemoved(position);
-                                }
-                                cdAdapter.notifyDataSetChanged();
-                            }
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                db.removeCardInformation(CardListAdapter.getData().get(viewHolder.getAdapterPosition()).getID());
+                CardListAdapter.getData().remove(viewHolder.getAdapterPosition());
+                cdAdapter.notifyDataSetChanged();
+            }
 
-                            @Override
-                            public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    db.removeCardInformation(CardListAdapter.getData().get(position).getID());
-                                    CardListAdapter.getData().remove(position);
-                                    cdAdapter.notifyItemRemoved(position);
-                                }
-                                cdAdapter.notifyDataSetChanged();
-                            }
-                        });
+            @Override
+            public void onMoved(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, int fromPos, RecyclerView.ViewHolder target, int toPos, int x, int y) {
+                super.onMoved(recyclerView, viewHolder, fromPos, target, toPos, x, y);
+            }
+        };
 
-        rv.addOnItemTouchListener(swipeTouchListener);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(rv);
         return view;
 
     }

@@ -34,9 +34,17 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     }
 
     @Override
-    public void onBindViewHolder(final CardViewHolder holder, int position) {
+    public void onBindViewHolder(final CardViewHolder holder, final int position) {
         holder.title.setText(data.get(position).getTitle());
         holder.description.setText(data.get(position).getDescription());
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data.remove(holder);
+               notifyItemRemoved(position);
+                notifyItemRangeChanged(position,data.size());
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +56,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
                 activity.overridePendingTransition(R.anim.scale_by_y, R.anim.alpha_out);
             }
         });
+        
     }
 
     @Override
@@ -68,6 +77,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         CardView card;
         TextView title;
         TextView description;
+        Button button;
 
 
         public CardViewHolder(final View itemView) {
@@ -75,6 +85,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
             card = (CardView)itemView.findViewById(R.id.card);
             title = (TextView)itemView.findViewById(R.id.title);
             description = (TextView)itemView.findViewById(R.id.cardDescription);
+            button = (Button)itemView.findViewById(R.id.removeButton);
         }
 
     }
