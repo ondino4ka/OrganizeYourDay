@@ -20,7 +20,7 @@ import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListen
 
 import java.util.List;
 
-public class FragmentHome extends android.app.Fragment {
+public class FragmentHome extends android.support.v4.app.Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -114,24 +114,23 @@ public class FragmentHome extends android.app.Fragment {
         RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
         animation.runPendingAnimations();
 
-        rv.setLayoutManager(new LinearLayoutManager(context));
-        rv.setItemAnimator(animation);
+       rv.setLayoutManager(new LinearLayoutManager(context));rv.setItemAnimator(animation);
         context = ContextContainer.getContext();
         db = new DatabaseHelper(context);
-        cdAdapter = new CardListAdapter(db.getListOfDataBaseComponent());
-        rv.setAdapter(cdAdapter);
+       cdAdapter = new CardListAdapter(db.getListOfDataBaseComponent());
+       rv.setAdapter(cdAdapter);
         
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(rv,
                         new SwipeableRecyclerViewTouchListener.SwipeListener() {
                             @Override
                             public boolean canSwipeLeft(int position) {
-                                return true;
+                                return false;
                             }
 
                             @Override
                             public boolean canSwipeRight(int position) {
-                                return false;
+                                return true;
                             }
 
                             @Override
@@ -161,12 +160,12 @@ public class FragmentHome extends android.app.Fragment {
     }
 
     public void refreshAdapter(){
-        cdAdapter.setData(db.getListOfDataBaseComponent());
+       cdAdapter.setData(db.getListOfDataBaseComponent());
         cdAdapter.notifyItemChanged(CardListAdapter.getData().size());
         }
 
     public void refreshAdapter(List<CardsData> data){
-        cdAdapter.setData(data);
+       cdAdapter.setData(data);
         cdAdapter.notifyDataSetChanged();
     }
 }
