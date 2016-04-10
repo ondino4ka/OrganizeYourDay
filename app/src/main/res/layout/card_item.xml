@@ -60,7 +60,6 @@
                     android:textColor="@color/md_grey_700"
                 />
             </GridLayout>
-
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

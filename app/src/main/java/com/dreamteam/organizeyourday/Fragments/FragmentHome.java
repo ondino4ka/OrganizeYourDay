@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListen
 
 import java.util.List;
 
-public class FragmentHome extends android.app.Fragment {
+public class FragmentHome extends android.support.v4.app.Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -30,7 +31,6 @@ public class FragmentHome extends android.app.Fragment {
     private String mParam2;
 
     private Context context;
-    int counter =0;
     private View view;
     DatabaseHelper db;
     private CardListAdapter cdAdapter;
@@ -110,63 +110,24 @@ public class FragmentHome extends android.app.Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         setAnimator(view);
-
-        RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
+        final RecyclerView rv = (RecyclerView) view.findViewById(R.id.cardList);
         animation.runPendingAnimations();
-
         rv.setLayoutManager(new LinearLayoutManager(context));
-        rv.setItemAnimator(animation);
         context = ContextContainer.getContext();
         db = new DatabaseHelper(context);
         cdAdapter = new CardListAdapter(db.getListOfDataBaseComponent());
         rv.setAdapter(cdAdapter);
-        
-        SwipeableRecyclerViewTouchListener swipeTouchListener =
-                new SwipeableRecyclerViewTouchListener(rv,
-                        new SwipeableRecyclerViewTouchListener.SwipeListener() {
-                            @Override
-                            public boolean canSwipeLeft(int position) {
-                                return true;
-                            }
-
-                            @Override
-                            public boolean canSwipeRight(int position) {
-                                return false;
-                            }
-
-                            @Override
-                            public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    db.removeCardInformation(CardListAdapter.getData().get(position).getID());
-                                    CardListAdapter.getData().remove(position);
-                                    cdAdapter.notifyItemRemoved(position);
-                                }
-                                cdAdapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    db.removeCardInformation(CardListAdapter.getData().get(position).getID());
-                                    CardListAdapter.getData().remove(position);
-                                    cdAdapter.notifyItemRemoved(position);
-                                }
-                                cdAdapter.notifyDataSetChanged();
-                            }
-                        });
-
-        rv.addOnItemTouchListener(swipeTouchListener);
         return view;
-
     }
 
     public void refreshAdapter(){
-        cdAdapter.setData(db.getListOfDataBaseComponent());
-        cdAdapter.notifyItemChanged(CardListAdapter.getData().size());
+       cdAdapter.setData(db.getListOfDataBaseComponent());
+        cdAdapter.notifyDataSetChanged();
         }
 
     public void refreshAdapter(List<CardsData> data){
-        cdAdapter.setData(data);
+       cdAdapter.setData(data);
         cdAdapter.notifyDataSetChanged();
     }
+
 }

@@ -3,7 +3,11 @@ package com.dreamteam.organizeyourday;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
 
 public class EditCardActivity extends AppCompatActivity {
 
@@ -22,9 +26,26 @@ public class EditCardActivity extends AppCompatActivity {
         ThemeManager.setCurrentTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_card);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
+
         TextView titleText = (TextView) findViewById(R.id.textAbout);
         titleText.setText(intent.getStringExtra("title"));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.editcard_toolbar_menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.removeCardButton){
+            DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
+            db.removeCardInformation(Integer.parseInt(getIntent().getStringExtra("id")));
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
