@@ -9,8 +9,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -42,15 +40,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeManager.setCurrentMainTheme(this);
-        home = new FragmentHome();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        home = new FragmentHome();
+        share = new FragmentShare();
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new SectionPagerAdapter(getSupportFragmentManager()));
@@ -89,7 +87,7 @@ public class MainActivity extends AppCompatActivity
                     return home;
                 case 1:
                 default:
-                    return new FragmentShare();
+                    return share;
             }
         }
 
@@ -108,6 +106,17 @@ public class MainActivity extends AppCompatActivity
                     return "Today";
             }
         }
+    }
+
+    public void jumpToAccount(View view) {
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        Intent intent = new Intent(MainActivity.this, Account.class);
+        startActivityForResult(intent,RESULT_OK);
+        overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
     }
 
     @Override
@@ -176,24 +185,9 @@ ftrans.commit();
         return true;
     }
 
-
-
     @Override
         public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
-
-
-    public void jumpToAccount(View view) {
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }
-        Intent intent = new Intent(MainActivity.this, Account.class);
-        startActivityForResult(intent,RESULT_OK);
-        overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
-    }
-
 }

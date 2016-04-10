@@ -31,7 +31,6 @@ public class FragmentHome extends android.support.v4.app.Fragment {
     private String mParam2;
 
     private Context context;
-    int counter =0;
     private View view;
     DatabaseHelper db;
     private CardListAdapter cdAdapter;
@@ -111,42 +110,14 @@ public class FragmentHome extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         setAnimator(view);
-
-
-
-        final RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
+        final RecyclerView rv = (RecyclerView) view.findViewById(R.id.cardList);
         animation.runPendingAnimations();
-       rv.setLayoutManager(new LinearLayoutManager(context));
+        rv.setLayoutManager(new LinearLayoutManager(context));
         context = ContextContainer.getContext();
         db = new DatabaseHelper(context);
-       cdAdapter = new CardListAdapter(db.getListOfDataBaseComponent());
-        /*ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                db.removeCardInformation(CardListAdapter.getData().get(viewHolder.getAdapterPosition()).getID());
-                CardListAdapter.getData().remove(CardListAdapter.getData().get(viewHolder.getAdapterPosition()));
-                cdAdapter.notifyDataSetChanged();
-                db.close();
-            }
-
-            @Override
-            public void onMoved(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, int fromPos, RecyclerView.ViewHolder target, int toPos, int x, int y) {
-                super.onMoved(recyclerView, viewHolder, fromPos, target, toPos, x, y);
-            }
-        };
-
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(rv);*/
-
+        cdAdapter = new CardListAdapter(db.getListOfDataBaseComponent());
         rv.setAdapter(cdAdapter);
         return view;
-
     }
 
     public void refreshAdapter(){

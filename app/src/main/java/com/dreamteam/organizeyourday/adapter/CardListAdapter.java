@@ -4,16 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.dreamteam.organizeyourday.ContextContainer;
 import com.dreamteam.organizeyourday.EditCardActivity;
-import com.dreamteam.organizeyourday.MainActivity;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
 
@@ -43,13 +39,8 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), EditCardActivity.class);
-                int ID = data.get(holder.getAdapterPosition()).getID();
-                intent.putExtra("id",""+ID);
+                intent.putExtra("id","" + data.get(holder.getAdapterPosition()).getID());
                 intent.putExtra("title", holder.title.getText().toString());
-
-
-
-
                 Activity activity = (Activity) v.getContext();
                 activity.startActivityForResult(intent, Activity.RESULT_OK);
                 activity.overridePendingTransition(R.anim.scale_by_y, R.anim.alpha_out);

@@ -1,14 +1,10 @@
 package com.dreamteam.organizeyourday;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
@@ -34,9 +30,6 @@ public class EditCardActivity extends AppCompatActivity {
 
         TextView titleText = (TextView) findViewById(R.id.textAbout);
         titleText.setText(intent.getStringExtra("title"));
-
-
-
     }
 
     @Override
