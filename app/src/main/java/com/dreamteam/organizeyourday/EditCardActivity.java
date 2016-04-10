@@ -7,14 +7,22 @@ import android.widget.TextView;
 
 public class EditCardActivity extends AppCompatActivity {
 
+    private boolean isEnterAnimationComplete = false;
     @Override
     protected void onPause(){
         super.onPause();
-        overridePendingTransition(R.anim.alpha_in, R.anim.scale_by_y_reverse);
+        overridePendingTransition(R.anim.down_anim_fade_in, R.anim.scale_by_y_reverse);
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if(isEnterAnimationComplete) {
+            super.onBackPressed();
+        }
+    }
+
+    public void onEnterAnimationComplete()
+    {
+        isEnterAnimationComplete = true;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

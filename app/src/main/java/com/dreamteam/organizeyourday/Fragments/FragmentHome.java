@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -60,7 +61,7 @@ public class FragmentHome extends android.app.Fragment {
 
     private void setAnimator(android.view.View view)
     {
-        translateAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.right_translate);
+        translateAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.alpha_in);
         animation = new RecyclerView.ItemAnimator() {
             @Override
             public boolean animateDisappearance(RecyclerView.ViewHolder viewHolder, ItemHolderInfo preLayoutInfo, ItemHolderInfo postLayoutInfo) {
@@ -109,18 +110,27 @@ public class FragmentHome extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        setAnimator(view);
 
-        RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
-        animation.runPendingAnimations();
+
+        final RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
+
+        rv.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                setAnimator(view);
+                rv.setItemAnimator(animation);
+               // animation.runPendingAnimations();
+                return true;
+            }
+        });
 
         rv.setLayoutManager(new LinearLayoutManager(context));
-        rv.setItemAnimator(animation);
+
         context = ContextContainer.getContext();
         db = new DatabaseHelper(context);
         cdAdapter = new CardListAdapter(db.getListOfDataBaseComponent());
         rv.setAdapter(cdAdapter);
-        
+
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(rv,
                         new SwipeableRecyclerViewTouchListener.SwipeListener() {

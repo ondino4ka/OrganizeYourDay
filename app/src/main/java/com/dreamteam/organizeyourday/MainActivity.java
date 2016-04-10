@@ -1,6 +1,5 @@
 package com.dreamteam.organizeyourday;
 
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddNewCardActivity.class);
                 startActivityForResult(intent, RESULT_OK);
-                overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
+                overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
 
                 //DatabaseHelper db = new DatabaseHelper(ContextContainer.getContainer());
                 //db.addCard("test title" + counter++);
@@ -126,18 +125,18 @@ public class MainActivity extends AppCompatActivity
             case R.id.about:
                 intent = new Intent(MainActivity.this, AboutActivity.class);
                 startActivityForResult(intent, RESULT_OK);
-                overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
+                overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
                 break;
             case R.id.settings:
                 intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivityForResult(intent,RESULT_OK);
-                overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
+                overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
                 break;
             case R.id.notifications:
                 fab.hide();
                 intent = new Intent(MainActivity.this, TimeNotification.class);
-                startActivityForResult(intent,RESULT_OK);
-                overridePendingTransition(R.anim.rotate_anim, R.anim.alpha_out);
+                startActivityForResult(intent, RESULT_OK);
+                overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
                 break;
         }
 ftrans.commit();
@@ -169,7 +168,7 @@ ftrans.commit();
         }
         Intent intent = new Intent(MainActivity.this, Account.class);
         startActivityForResult(intent,RESULT_OK);
-        overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
+        overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
     }
 
 }

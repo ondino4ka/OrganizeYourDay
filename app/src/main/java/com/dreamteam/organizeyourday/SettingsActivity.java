@@ -8,14 +8,22 @@ import com.dreamteam.organizeyourday.Fragments.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    private boolean isEnterAnimationComplete = false;
     @Override
     protected void onPause(){
         super.onPause();
-        overridePendingTransition(R.anim.alpha_in, R.anim.to_down_translate);
+        overridePendingTransition(R.anim.down_anim_fade_in, R.anim.down_anim_out);
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if(isEnterAnimationComplete) {
+            super.onBackPressed();
+        }
+    }
+
+    public void onEnterAnimationComplete()
+    {
+        isEnterAnimationComplete = true;
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
