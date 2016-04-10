@@ -45,9 +45,12 @@ public class MainActivity extends AppCompatActivity
         home = new FragmentHome();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new SectionPagerAdapter(getSupportFragmentManager()));
@@ -181,12 +184,6 @@ ftrans.commit();
         return true;
     }
 
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 
     public void jumpToAccount(View view) {
 

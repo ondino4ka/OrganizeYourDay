@@ -112,15 +112,15 @@ public class FragmentHome extends android.support.v4.app.Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         setAnimator(view);
 
+
+
         final RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
         animation.runPendingAnimations();
-
-       rv.setLayoutManager(new LinearLayoutManager(context));rv.setItemAnimator(animation);
+       rv.setLayoutManager(new LinearLayoutManager(context));
         context = ContextContainer.getContext();
         db = new DatabaseHelper(context);
        cdAdapter = new CardListAdapter(db.getListOfDataBaseComponent());
-       rv.setAdapter(cdAdapter);
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        /*ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -130,8 +130,9 @@ public class FragmentHome extends android.support.v4.app.Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 db.removeCardInformation(CardListAdapter.getData().get(viewHolder.getAdapterPosition()).getID());
-                CardListAdapter.getData().remove(viewHolder.getAdapterPosition());
+                CardListAdapter.getData().remove(CardListAdapter.getData().get(viewHolder.getAdapterPosition()));
                 cdAdapter.notifyDataSetChanged();
+                db.close();
             }
 
             @Override
@@ -141,18 +142,21 @@ public class FragmentHome extends android.support.v4.app.Fragment {
         };
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(rv);
+        itemTouchHelper.attachToRecyclerView(rv);*/
+
+        rv.setAdapter(cdAdapter);
         return view;
 
     }
 
     public void refreshAdapter(){
        cdAdapter.setData(db.getListOfDataBaseComponent());
-        cdAdapter.notifyItemChanged(CardListAdapter.getData().size());
+        cdAdapter.notifyDataSetChanged();
         }
 
     public void refreshAdapter(List<CardsData> data){
        cdAdapter.setData(data);
         cdAdapter.notifyDataSetChanged();
     }
+
 }

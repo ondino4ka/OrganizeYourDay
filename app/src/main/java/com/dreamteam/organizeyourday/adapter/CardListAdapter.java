@@ -19,10 +19,11 @@ import com.dreamteam.organizeyourday.dataOfCards.CardsData;
 
 import java.util.List;
 
-public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardViewHolder>  {
+public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardViewHolder>{
 
 
     private static List<CardsData> data;
+
     public CardListAdapter(List<CardsData> data) {
         this.data = data;
     }
@@ -37,26 +38,23 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     public void onBindViewHolder(final CardViewHolder holder, final int position) {
         holder.title.setText(data.get(position).getTitle());
         holder.description.setText(data.get(position).getDescription());
-        holder.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                data.remove(holder);
-               notifyItemRemoved(position);
-                notifyItemRangeChanged(position,data.size());
-            }
-        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), EditCardActivity.class);
+                int ID = data.get(holder.getAdapterPosition()).getID();
+                intent.putExtra("id",""+ID);
                 intent.putExtra("title", holder.title.getText().toString());
+
+
+
 
                 Activity activity = (Activity) v.getContext();
                 activity.startActivityForResult(intent, Activity.RESULT_OK);
                 activity.overridePendingTransition(R.anim.scale_by_y, R.anim.alpha_out);
             }
         });
-        
     }
 
     @Override
@@ -77,15 +75,12 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         CardView card;
         TextView title;
         TextView description;
-        Button button;
-
 
         public CardViewHolder(final View itemView) {
             super(itemView);
             card = (CardView)itemView.findViewById(R.id.card);
             title = (TextView)itemView.findViewById(R.id.title);
             description = (TextView)itemView.findViewById(R.id.cardDescription);
-            button = (Button)itemView.findViewById(R.id.removeButton);
         }
 
     }
