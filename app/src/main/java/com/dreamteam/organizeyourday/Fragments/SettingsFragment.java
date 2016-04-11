@@ -1,5 +1,6 @@
 package com.dreamteam.organizeyourday.Fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -42,7 +43,8 @@ public class SettingsFragment extends PreferenceFragment{
             }
             if(MainActivity.isCurrentThemeChanged && !isFirstStart)
             {
-                jumpToMainIntent(new Intent(preference.getContext(), MainActivity.class));
+                Activity activity = (Activity) preference.getContext();
+                activity.onBackPressed();
                 return true;
             }
             return true;
@@ -77,9 +79,6 @@ public class SettingsFragment extends PreferenceFragment{
 
 
 
-    private void jumpToMainIntent(Intent intent)
-    {
-        startActivity(intent);
-    }
+
 
 }

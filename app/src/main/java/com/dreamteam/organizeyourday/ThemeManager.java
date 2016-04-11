@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 public class ThemeManager {
 
     public static int index = 0;
-    public static void setCurrentMainTheme(Activity activity)
+    public static void setCurrentNoActionBarTheme(Activity activity)
     {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(activity);
         switch (sp.getString("pref_themes_list", "0")) {
