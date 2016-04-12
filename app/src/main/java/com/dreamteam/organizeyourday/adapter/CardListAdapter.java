@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dreamteam.organizeyourday.ContextContainer;
@@ -91,9 +92,13 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         CardView card;
         TextView title;
         TextView description;
-
+        LinearLayout linearLayout;
         public CardViewHolder(final View itemView) {
             super(itemView);
+
+
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.card_layout);
+            linearLayout.setBackgroundColor( itemView.getResources().getColor( R.color.md_yellow_400));
             card = (CardView)itemView.findViewById(R.id.card);
             title = (TextView)itemView.findViewById(R.id.title);
             description = (TextView)itemView.findViewById(R.id.cardDescription);

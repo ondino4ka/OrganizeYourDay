@@ -16,7 +16,8 @@
     </group>
 
     <item android:title="@string/nav_bar_settings">
-        <menu>
+        <menu >
+
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
@@ -35,6 +36,7 @@
                 android:id="@+id/notifications"
                 android:icon="@drawable/ic_info"
                 android:title="Notifications"/>
+
         </menu>
     </item>
 

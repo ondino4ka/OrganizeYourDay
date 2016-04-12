@@ -7,6 +7,7 @@
               android:layout_marginTop="5dp"
               android:layout_marginRight="8dp"
               android:layout_marginLeft="8dp"
+    android:id="@+id/card_layout"
     android:animateLayoutChanges="true"
 >
 
@@ -16,8 +17,9 @@
             android:layout_height="wrap_content"
             card:cardCornerRadius="3dp"
             card:cardElevation="2dp"
-        android:animateLayoutChanges="true"
-            card:cardUseCompatPadding="true">
+            android:animateLayoutChanges="true"
+            card:cardUseCompatPadding="true"
+        android:clickable="false">
 
 
                 <TextView
