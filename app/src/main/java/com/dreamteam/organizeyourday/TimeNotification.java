@@ -36,7 +36,7 @@ public class TimeNotification extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Notifications.class);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(ContextContainer.getContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         am.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pendingIntent);
     }
 

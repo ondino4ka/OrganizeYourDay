@@ -39,6 +39,9 @@
             android:name=".DataBase.DataBaseTest"
             android:label="DataBase"></activity>
 
+
+
+
         <receiver android:name=".Notifications" />
 
         <activity android:name=".AddNewCardActivity"

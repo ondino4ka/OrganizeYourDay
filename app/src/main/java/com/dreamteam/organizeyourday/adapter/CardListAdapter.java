@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dreamteam.organizeyourday.EditCardActivity;
+
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
 
@@ -27,6 +28,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item,parent,false);
+
         return new CardViewHolder(view);
     }
 
@@ -44,6 +46,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
                 Activity activity = (Activity) v.getContext();
                 activity.startActivityForResult(intent, Activity.RESULT_OK);
                 activity.overridePendingTransition(R.anim.scale_by_y, R.anim.alpha_out);
+
             }
         });
     }
@@ -72,6 +75,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
             card = (CardView)itemView.findViewById(R.id.card);
             title = (TextView)itemView.findViewById(R.id.title);
             description = (TextView)itemView.findViewById(R.id.cardDescription);
+
         }
 
     }

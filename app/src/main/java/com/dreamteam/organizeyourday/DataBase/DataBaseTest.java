@@ -1,7 +1,10 @@
 package com.dreamteam.organizeyourday.DataBase;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -11,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.dreamteam.organizeyourday.ContextContainer;
+import com.dreamteam.organizeyourday.Notifications;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.ThemeManager;
 
@@ -19,13 +24,15 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
 
     Button bdAdd, bdRead, bdClear, bdSort, bdSearch;
     EditText etName, etDescription, etPriority, etSearch;
-
     DatabaseHelper databaseHelper;
+
+    private AlarmManager am;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeManager.setCurrentTheme(this);
         super.onCreate(savedInstanceState);
+        am = (AlarmManager) getSystemService(ALARM_SERVICE);
         setContentView(R.layout.data_base_test);
 
         bdAdd = (Button) findViewById(R.id.bdAdd);
@@ -49,6 +56,7 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
         etSearch = (EditText) findViewById(R.id.etSearch);
 
         databaseHelper = new DatabaseHelper(this);
+
     }
 
     @Override
@@ -60,6 +68,7 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
         String search = etSearch.getText().toString();
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
 
+
         ContentValues contentValues = new ContentValues();
         String[] selectionArgs = null;
 
@@ -70,6 +79,13 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
                 contentValues.put(DatabaseHelper.DESCRIPTION_COLUMN, description);
                 contentValues.put(DatabaseHelper.PRIORITY_COLUMN, priority);
                 database.insert(DatabaseHelper.TABLE_CONTACTS, null, contentValues);
+
+                Intent intent = new Intent(ContextContainer.getContext(), Notifications.class);
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(ContextContainer.getContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                am.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pendingIntent);
+
+
                 break;
 
             //Cursor cursor = database.query(DatabaseHelper.TABLE_CONTACTS, null, null, null, null, null, "reminders_headline, priority");
