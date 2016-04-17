@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
+import com.dreamteam.organizeyourday.Notification.Notifications;
 
 
 public class AddNewCardActivity extends AppCompatActivity {

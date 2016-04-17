@@ -15,10 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.dreamteam.organizeyourday.ContextContainer;
-import com.dreamteam.organizeyourday.Notifications;
+
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.ThemeManager;
 
+//МОЖНО НАХРЕН УДАЛИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 public class DataBaseTest extends AppCompatActivity implements View.OnClickListener{
 
@@ -80,10 +81,10 @@ public class DataBaseTest extends AppCompatActivity implements View.OnClickListe
                 contentValues.put(DatabaseHelper.PRIORITY_COLUMN, priority);
                 database.insert(DatabaseHelper.TABLE_CONTACTS, null, contentValues);
 
-                Intent intent = new Intent(ContextContainer.getContext(), Notifications.class);
+              //  Intent intent = new Intent(ContextContainer.getContext(), Notifications.class);
 
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(ContextContainer.getContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-                am.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pendingIntent);
+             //   PendingIntent pendingIntent = PendingIntent.getBroadcast(ContextContainer.getContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+              //  am.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pendingIntent);
 
 
                 break;

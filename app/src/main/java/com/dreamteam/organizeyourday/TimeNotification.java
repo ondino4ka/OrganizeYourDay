@@ -8,11 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.dreamteam.organizeyourday.DataBase.DataBaseTest;
+import com.dreamteam.organizeyourday.Notification.Notifications;
 
 
 public class TimeNotification extends AppCompatActivity {
 
-
+    //МОЖНО НАХРЕН УДАЛИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private AlarmManager am;
     @Override
     protected void onPause(){
