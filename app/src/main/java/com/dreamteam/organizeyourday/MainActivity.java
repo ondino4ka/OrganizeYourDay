@@ -1,7 +1,6 @@
 package com.dreamteam.organizeyourday;
 
-
-import android.app.AlarmManager;
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,10 +20,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
 import com.dreamteam.organizeyourday.Fragments.FragmentHome;
 import com.dreamteam.organizeyourday.Fragments.FragmentShare;
-
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,7 +38,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ThemeManager.setCurrentMainTheme(this);
+        ThemeManager.setCurrentNoActionBarTheme(this);
+
         super.onCreate(savedInstanceState);
 
 
@@ -66,7 +64,11 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddNewCardActivity.class);
                 startActivityForResult(intent, RESULT_OK);
-                overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
+                overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
+
+                //DatabaseHelper db = new DatabaseHelper(ContextContainer.getContainer());
+                //db.addCard("test title" + counter++);
+                // home.refreshAdapter();
             }
         });
 
@@ -127,6 +129,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onRestart() {
         super.onRestart();
+
         if (isCurrentThemeChanged) {
             isCurrentThemeChanged=false;
             recreate();
@@ -161,6 +164,13 @@ public class MainActivity extends AppCompatActivity
         switch (id){
             case R.id.home:
                 fab.show();
+                ftrans.show(home);
+                //ftrans.replace(R.id.container, home);
+                break;
+            case R.id.nav_share:
+                fab.hide();
+                ftrans.show(share);
+                //ftrans.replace(R.id.container, share);
                 break;
             case R.id.sorting:
                 DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
@@ -169,18 +179,18 @@ public class MainActivity extends AppCompatActivity
             case R.id.about:
                 intent = new Intent(MainActivity.this, AboutActivity.class);
                 startActivityForResult(intent, RESULT_OK);
-                overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
+                overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
                 break;
             case R.id.settings:
                 intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivityForResult(intent,RESULT_OK);
-                overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
+                overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
                 break;
             case R.id.notifications:
                 fab.hide();
                 intent = new Intent(MainActivity.this, TimeNotification.class);
-                startActivityForResult(intent,RESULT_OK);
-                overridePendingTransition(R.anim.rotate_anim, R.anim.alpha_out);
+                startActivityForResult(intent, RESULT_OK);
+                overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
                 break;
         }
 ftrans.commit();
@@ -195,4 +205,17 @@ ftrans.commit();
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
+
+
+    public void jumpToAccount(View view) {
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        Intent intent = new Intent(MainActivity.this, Account.class);
+        startActivityForResult(intent,RESULT_OK);
+        overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
+    }
+
 }

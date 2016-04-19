@@ -1,11 +1,9 @@
 package com.dreamteam.organizeyourday;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -16,16 +14,26 @@ import com.dreamteam.organizeyourday.Notification.Notifications;
 
 
 public class AddNewCardActivity extends AppCompatActivity {
+
+private boolean isEnterAnimationComplete = false;
     private AlarmManager am;
 
     @Override
     protected void onPause(){
         super.onPause();
-        overridePendingTransition(R.anim.alpha_in, R.anim.to_down_translate);
+        overridePendingTransition(R.anim.down_anim_fade_in, R.anim.down_anim_out);
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if(isEnterAnimationComplete) {
+            super.onBackPressed();
+        }
+
+    }
+
+    public void onEnterAnimationComplete()
+    {
+        isEnterAnimationComplete = true;
     }
 
     @Override
@@ -40,8 +48,8 @@ public class AddNewCardActivity extends AppCompatActivity {
         final TextInputEditText descriptionText = (TextInputEditText) findViewById(R.id.inputTextDescription);
         final Spinner prioritySpinner = (Spinner)findViewById(R.id.prioritySpinner);
         Button addButton = (Button) findViewById(R.id.addButton);
-        Button cancelButton = (Button) findViewById(R.id.cancel_button);
 
+        Button cancelButton = (Button) findViewById(R.id.cancel_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,9 +60,8 @@ public class AddNewCardActivity extends AppCompatActivity {
                 DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
                 db.addCard(
                         titleText.getText().toString()
-                        , descriptionText.getText().toString()
-                        , prioritySpinner.getSelectedItemPosition()
-
+                        ,descriptionText.getText().toString()
+                        ,prioritySpinner.getSelectedItemPosition()
                 );
 
                 Intent intent = new Intent(getApplicationContext(), Notifications.class);
@@ -81,5 +88,4 @@ public class AddNewCardActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(this, "Write title name!", Toast.LENGTH_SHORT);
         toast.show();
     }
-
 }

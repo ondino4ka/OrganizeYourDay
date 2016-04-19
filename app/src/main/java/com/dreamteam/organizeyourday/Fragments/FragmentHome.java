@@ -31,6 +31,7 @@ public class FragmentHome extends android.support.v4.app.Fragment {
     private String mParam2;
 
     private Context context;
+    int counter =0;
     private View view;
     DatabaseHelper db;
     private CardListAdapter cdAdapter;
@@ -60,7 +61,7 @@ public class FragmentHome extends android.support.v4.app.Fragment {
 
     private void setAnimator(android.view.View view)
     {
-        translateAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.right_translate);
+        translateAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.alpha_in);
         animation = new RecyclerView.ItemAnimator() {
             @Override
             public boolean animateDisappearance(RecyclerView.ViewHolder viewHolder, ItemHolderInfo preLayoutInfo, ItemHolderInfo postLayoutInfo) {
@@ -121,13 +122,12 @@ public class FragmentHome extends android.support.v4.app.Fragment {
     }
 
     public void refreshAdapter(){
-       cdAdapter.setData(db.getListOfDataBaseComponent());
-        cdAdapter.notifyDataSetChanged();
+        cdAdapter.setData(db.getListOfDataBaseComponent());
+        cdAdapter.notifyItemChanged(CardListAdapter.getData().size());
         }
 
     public void refreshAdapter(List<CardsData> data){
-       cdAdapter.setData(data);
+        cdAdapter.setData(data);
         cdAdapter.notifyDataSetChanged();
     }
-
 }

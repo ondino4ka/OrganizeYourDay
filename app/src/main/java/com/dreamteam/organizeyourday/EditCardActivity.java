@@ -3,31 +3,41 @@ package com.dreamteam.organizeyourday;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
 
 public class EditCardActivity extends AppCompatActivity {
 
+    private boolean isEnterAnimationComplete = false;
     @Override
     protected void onPause(){
         super.onPause();
-        overridePendingTransition(R.anim.alpha_in, R.anim.scale_by_y_reverse);
+        overridePendingTransition(R.anim.down_anim_fade_in, R.anim.down_anim_out);
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if(isEnterAnimationComplete) {
+            super.onBackPressed();
+        }
+    }
+
+    public void onEnterAnimationComplete()
+    {
+        isEnterAnimationComplete = true;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        ThemeManager.setCurrentTheme(this);
+        ThemeManager.setCurrentNoActionBarTheme(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_card);
-        final Intent intent = getIntent();
+      //  setContentView(R.layout.activity_edit_card);
+        setContentView(R.layout.activity_edit_card_test);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.edit_toolbar);
+        setSupportActionBar(toolbar);
 
+        Intent intent = getIntent();
         TextView titleText = (TextView) findViewById(R.id.textAbout);
         titleText.setText(intent.getStringExtra("title"));
     }
