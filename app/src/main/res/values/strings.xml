@@ -19,7 +19,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="about_name">Organize Your Day</string>
-    <string name="about_text">\n<b>Распространяется по лицензии GPL</b>\nВерсия 0.2\n\n© Plexiform, 2016\n\n</string>
+    <string name="about_text">\n<b>Распространяется по лицензии GPL</b>\nВерсия 0.4\n\n© Plexiform, 2016\n\n</string>
 
     <string name="pref_decor">Оформление</string>
     <string name="pref_data">Данные</string>

@@ -1,5 +1,10 @@
 package com.dreamteam.organizeyourday;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
@@ -16,7 +22,7 @@ import com.dreamteam.organizeyourday.Notification.Notifications;
 public class AddNewCardActivity extends AppCompatActivity {
 
 private boolean isEnterAnimationComplete = false;
-    private AlarmManager am;
+    public static AlarmManager am;
 
     @Override
     protected void onPause(){
@@ -67,11 +73,10 @@ private boolean isEnterAnimationComplete = false;
                 Intent intent = new Intent(getApplicationContext(), Notifications.class);
                 intent.putExtra("title", titleText.getText().toString());
                 intent.putExtra("description", descriptionText.getText().toString());
-                intent.putExtra("id", prioritySpinner.getSelectedItemPosition());
+                intent.putExtra("id",db.getLastId());
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),
-                prioritySpinner.getSelectedItemPosition(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                db.getLastId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 am.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pendingIntent);
-
                 onBackPressed();
             }
         });

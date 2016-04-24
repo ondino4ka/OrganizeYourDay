@@ -31,7 +31,7 @@ public class FragmentHome extends android.support.v4.app.Fragment {
     private String mParam2;
 
     private Context context;
-    int counter =0;
+    int counter = 0;
     private View view;
     DatabaseHelper db;
     private CardListAdapter cdAdapter;
@@ -47,7 +47,6 @@ public class FragmentHome extends android.support.v4.app.Fragment {
     }
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +54,9 @@ public class FragmentHome extends android.support.v4.app.Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
-    private void setAnimator(android.view.View view)
-    {
+    private void setAnimator(android.view.View view) {
         translateAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.alpha_in);
         animation = new RecyclerView.ItemAnimator() {
             @Override
@@ -106,13 +102,12 @@ public class FragmentHome extends android.support.v4.app.Fragment {
         };
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        setAnimator(view);
         final RecyclerView rv = (RecyclerView) view.findViewById(R.id.cardList);
-        animation.runPendingAnimations();
         rv.setLayoutManager(new LinearLayoutManager(context));
         context = ContextContainer.getContext();
         db = new DatabaseHelper(context);
@@ -121,12 +116,14 @@ public class FragmentHome extends android.support.v4.app.Fragment {
         return view;
     }
 
-    public void refreshAdapter(){
+    @Override
+    public void onResume() {
+        super.onResume();
         cdAdapter.setData(db.getListOfDataBaseComponent());
         cdAdapter.notifyItemChanged(CardListAdapter.getData().size());
-        }
+    }
 
-    public void refreshAdapter(List<CardsData> data){
+    public void refreshAdapter(List<CardsData> data) {
         cdAdapter.setData(data);
         cdAdapter.notifyDataSetChanged();
     }

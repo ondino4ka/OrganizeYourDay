@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
 import com.dreamteam.organizeyourday.Fragments.FragmentHome;
 import com.dreamteam.organizeyourday.Fragments.FragmentShare;
 
@@ -115,16 +116,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void jumpToAccount(View view) {
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }
-        Intent intent = new Intent(MainActivity.this, Account.class);
-        startActivityForResult(intent,RESULT_OK);
-        overridePendingTransition(R.anim.from_down_translate, R.anim.alpha_out);
-    }
 
     @Override
     protected void onRestart() {
@@ -136,7 +127,6 @@ public class MainActivity extends AppCompatActivity
         }else {
             isCurrentThemeChanged=false;
         }
-        home.refreshAdapter();
     }
 
     @Override
@@ -164,13 +154,10 @@ public class MainActivity extends AppCompatActivity
         switch (id){
             case R.id.home:
                 fab.show();
-                ftrans.show(home);
-                //ftrans.replace(R.id.container, home);
+
                 break;
             case R.id.nav_share:
-                fab.hide();
-                ftrans.show(share);
-                //ftrans.replace(R.id.container, share);
+
                 break;
             case R.id.sorting:
                 DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());

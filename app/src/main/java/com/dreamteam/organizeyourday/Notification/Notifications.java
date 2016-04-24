@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 
 import com.dreamteam.organizeyourday.MainActivity;
 import com.dreamteam.organizeyourday.R;
@@ -15,8 +16,6 @@ import com.dreamteam.organizeyourday.R;
 public class Notifications extends BroadcastReceiver {
 
     private NotificationManager nm;
-
-    private final int NOTIFICATION_ID = 1;
 
     @Override
     public void onReceive(Context context, Intent intent) {

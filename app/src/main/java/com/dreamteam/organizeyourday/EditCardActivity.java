@@ -1,15 +1,20 @@
 package com.dreamteam.organizeyourday;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
+import com.dreamteam.organizeyourday.Notification.Notifications;
 
 public class EditCardActivity extends AppCompatActivity {
 
+    Intent intent;
     private boolean isEnterAnimationComplete = false;
     @Override
     protected void onPause(){
@@ -37,7 +42,7 @@ public class EditCardActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.edit_toolbar);
         setSupportActionBar(toolbar);
 
-        Intent intent = getIntent();
+        intent = getIntent();
         TextView titleText = (TextView) findViewById(R.id.textAbout);
         titleText.setText(intent.getStringExtra("title"));
     }
@@ -51,6 +56,7 @@ public class EditCardActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         if (item.getItemId() == R.id.removeCardButton){
             DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
             db.removeCardInformation(Integer.parseInt(getIntent().getStringExtra("id")));

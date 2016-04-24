@@ -128,4 +128,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return data;
     }
+
+    public int getLastId(){
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.query(DatabaseHelper.TABLE_CONTACTS, null, null, null, null, null, null);
+        cursor.moveToLast();
+        return cursor.getInt(0);
+    }
 }

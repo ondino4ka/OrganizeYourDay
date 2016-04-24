@@ -1,5 +1,6 @@
 package com.dreamteam.organizeyourday.adapter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
