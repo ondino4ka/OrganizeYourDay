@@ -66,17 +66,18 @@ private boolean isEnterAnimationComplete = false;
                 DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
                 db.addCard(
                         titleText.getText().toString()
-                        ,descriptionText.getText().toString()
-                        ,prioritySpinner.getSelectedItemPosition()
+                        , descriptionText.getText().toString()
+                        , prioritySpinner.getSelectedItemPosition()
                 );
 
                 Intent intent = new Intent(getApplicationContext(), Notifications.class);
                 intent.putExtra("title", titleText.getText().toString());
                 intent.putExtra("description", descriptionText.getText().toString());
-                intent.putExtra("id",db.getLastId());
+                intent.putExtra("id", db.getLastId());
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),
                 db.getLastId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 am.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pendingIntent);
+
                 onBackPressed();
             }
         });
@@ -92,5 +93,13 @@ private boolean isEnterAnimationComplete = false;
     void notifyMe() {
         Toast toast = Toast.makeText(this, "Write title name!", Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+  public static void CancelNotification(int id)
+    {
+        Intent intent = new Intent(ContextContainer.getContext(), Notifications.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(ContextContainer.getContext(),
+            id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        am.cancel(pendingIntent);
     }
 }
