@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.dreamteam.organizeyourday.AddNewCardActivity;
 import com.dreamteam.organizeyourday.ContextContainer;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
@@ -90,6 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public int removeCardInformation(int ID){
         SQLiteDatabase database = this.getWritableDatabase();
+        AddNewCardActivity.CancelNotification(ID);
         return database.delete(DatabaseHelper.TABLE_CONTACTS, ID_COLUMN + "="+ ID ,null);
     }
 
@@ -127,5 +129,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return data;
+    }
+
+    public int getLastId(){
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.query(DatabaseHelper.TABLE_CONTACTS, null, null, null, null, null, null);
+        cursor.moveToLast();
+        return cursor.getInt(0);
     }
 }

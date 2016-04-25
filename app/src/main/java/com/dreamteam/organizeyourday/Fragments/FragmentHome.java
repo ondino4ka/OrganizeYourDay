@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -21,7 +21,7 @@ import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListen
 
 import java.util.List;
 
-public class FragmentHome extends android.app.Fragment {
+public class FragmentHome extends android.support.v4.app.Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -31,7 +31,7 @@ public class FragmentHome extends android.app.Fragment {
     private String mParam2;
 
     private Context context;
-    int counter =0;
+    int counter = 0;
     private View view;
     DatabaseHelper db;
     private CardListAdapter cdAdapter;
@@ -47,7 +47,6 @@ public class FragmentHome extends android.app.Fragment {
     }
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +54,9 @@ public class FragmentHome extends android.app.Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
-    private void setAnimator(android.view.View view)
-    {
+    private void setAnimator(android.view.View view) {
         translateAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.alpha_in);
         animation = new RecyclerView.ItemAnimator() {
             @Override
@@ -106,76 +102,28 @@ public class FragmentHome extends android.app.Fragment {
         };
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
-
-
-        final RecyclerView rv = (RecyclerView)view.findViewById(R.id.cardList);
-
-        rv.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public boolean onPreDraw() {
-                setAnimator(view);
-                rv.setItemAnimator(animation);
-               // animation.runPendingAnimations();
-                return true;
-            }
-        });
-
+        final RecyclerView rv = (RecyclerView) view.findViewById(R.id.cardList);
         rv.setLayoutManager(new LinearLayoutManager(context));
-
         context = ContextContainer.getContext();
         db = new DatabaseHelper(context);
         cdAdapter = new CardListAdapter(db.getListOfDataBaseComponent());
         rv.setAdapter(cdAdapter);
-
-        SwipeableRecyclerViewTouchListener swipeTouchListener =
-                new SwipeableRecyclerViewTouchListener(rv,
-                        new SwipeableRecyclerViewTouchListener.SwipeListener() {
-                            @Override
-                            public boolean canSwipeLeft(int position) {
-                                return true;
-                            }
-
-                            @Override
-                            public boolean canSwipeRight(int position) {
-                                return false;
-                            }
-
-                            @Override
-                            public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    db.removeCardInformation(CardListAdapter.getData().get(position).getID());
-                                    CardListAdapter.getData().remove(position);
-                                    cdAdapter.notifyItemRemoved(position);
-                                }
-                                cdAdapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    db.removeCardInformation(CardListAdapter.getData().get(position).getID());
-                                    CardListAdapter.getData().remove(position);
-                                    cdAdapter.notifyItemRemoved(position);
-                                }
-                                cdAdapter.notifyDataSetChanged();
-                            }
-                        });
-
-        rv.addOnItemTouchListener(swipeTouchListener);
         return view;
-
     }
 
-    public void refreshAdapter(){
+    @Override
+    public void onResume() {
+        super.onResume();
         cdAdapter.setData(db.getListOfDataBaseComponent());
         cdAdapter.notifyItemChanged(CardListAdapter.getData().size());
-        }
+    }
 
-    public void refreshAdapter(List<CardsData> data){
+    public void refreshAdapter(List<CardsData> data) {
         cdAdapter.setData(data);
         cdAdapter.notifyDataSetChanged();
     }

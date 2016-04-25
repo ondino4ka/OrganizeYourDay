@@ -39,7 +39,10 @@
             android:name=".DataBase.DataBaseTest"
             android:label="DataBase"/>
 
-        <receiver android:name=".Notifications" />
+
+
+
+        <receiver android:name=".Notification.Notifications" />
 
         <activity android:name=".AddNewCardActivity"
             android:windowSoftInputMode="adjustPan">

@@ -11,6 +11,4 @@
         android:layout_marginLeft="@dimen/about_text_horizontal_margin"
         android:textStyle="normal" />
 
-
-
 </ScrollView>
