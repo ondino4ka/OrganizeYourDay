@@ -27,9 +27,11 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:paddingLeft="16dp"
-                    android:paddingTop="16dp"
+                    android:paddingTop="11dp"
                     android:id="@+id/title"
-                    android:textIsSelectable="false" />
+                    android:textIsSelectable="false"
+                    android:text="Title text"
+                    android:autoText="false" />
 
                 <TextView/>
 
@@ -39,14 +41,15 @@
                     android:layout_height="wrap_content"
                     android:text="Test information"
                     android:textSize="11sp"
-                    android:paddingBottom="16dp"
+                    android:paddingBottom="9dp"
                     android:paddingLeft="16dp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    android:paddingTop="8dp" />
 
                 <TextClock android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
-                    android:paddingBottom="16dp"
+                    android:paddingBottom="9dp"
                     android:layout_gravity="bottom|right"
                     android:textSize="14sp"
                     android:textColor="@color/md_grey_700"
