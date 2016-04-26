@@ -55,6 +55,13 @@ private boolean isEnterAnimationComplete = false;
 
         time = (TimePicker)findViewById(R.id.time);
         data = (TextView)findViewById(R.id.data);
+        final Calendar calendar = Calendar.getInstance();
+
+        data.setText(calendar.get(Calendar.DAY_OF_MONTH)
+                                    +"." + calendar.get(Calendar.MONTH)
+                                    +"." + calendar.get(Calendar.YEAR)
+        );
+
         titleText = (TextInputEditText) findViewById(R.id.inputTitleText);
         descriptionText = (TextInputEditText) findViewById(R.id.inputTextDescription);
         prioritySpinner = (Spinner)findViewById(R.id.prioritySpinner);
@@ -70,6 +77,8 @@ private boolean isEnterAnimationComplete = false;
                 dateDialog.show(getSupportFragmentManager(), "datePicker");
             }
         });
+
+
     }
 
     void notifyMe() {
@@ -122,7 +131,6 @@ private boolean isEnterAnimationComplete = false;
                     , time.getCurrentHour() + ":" + time.getCurrentMinute()
                     , data.getText().toString()
             );
-
             Intent intent = new Intent(getApplicationContext(), Notifications.class);
             intent.putExtra("title", titleText.getText().toString());
             intent.putExtra("description", descriptionText.getText().toString());

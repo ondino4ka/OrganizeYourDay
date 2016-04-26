@@ -61,9 +61,6 @@ public class TodayCardListAdapter extends RecyclerView.Adapter<TodayCardListAdap
         TextView description;
         public TodayCardViewHolder(final View itemView) {
             super(itemView);
-
-
-
             card = (CardView)itemView.findViewById(R.id.card);
             title = (TextView)itemView.findViewById(R.id.title);
             description = (TextView)itemView.findViewById(R.id.cardDescription);
