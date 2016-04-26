@@ -78,11 +78,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             int nameIndex = cursor.getColumnIndex(DatabaseHelper.REMINDERS_NAME_COLUMN);
             int descriptionIndex = cursor.getColumnIndex(DatabaseHelper.DESCRIPTION_COLUMN);
             int priorityIndex = cursor.getColumnIndex(DatabaseHelper.PRIORITY_COLUMN);
+            int timeIndex= cursor.getColumnIndex(DatabaseHelper.TIME);
+            int dataIndex = cursor.getColumnIndex(DatabaseHelper.DATE);
             do {
                 data.add(new CardsData(cursor.getInt(idIndex)
                         ,cursor.getString(nameIndex)
                         ,cursor.getString(descriptionIndex)
-                        ,0
+                        ,Integer.parseInt(cursor.getString(priorityIndex))
+                        ,cursor.getString(timeIndex)
+                        ,cursor.getString(dataIndex)
                         ));
             } while (cursor.moveToNext());
         }
@@ -99,12 +103,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return database.delete(DatabaseHelper.TABLE_CONTACTS, ID_COLUMN + "="+ ID ,null);
     }
 
-    public void addCard(String title, String description,int priority){
+    public void addCard(String title, String description,int priority,String time, String data){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHelper.REMINDERS_NAME_COLUMN, title);
         contentValues.put(DatabaseHelper.DESCRIPTION_COLUMN,description);
         contentValues.put(DatabaseHelper.PRIORITY_COLUMN, priority);
+        contentValues.put(DatabaseHelper.TIME, time);
+        contentValues.put(DatabaseHelper.DATE, data);
         database.insert(DatabaseHelper.TABLE_CONTACTS, null, contentValues);
         database.close();
         }
@@ -121,11 +127,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             int nameIndex = cursor.getColumnIndex(DatabaseHelper.REMINDERS_NAME_COLUMN);
             int descriptionIndex = cursor.getColumnIndex(DatabaseHelper.DESCRIPTION_COLUMN);
             int priorityIndex = cursor.getColumnIndex(DatabaseHelper.PRIORITY_COLUMN);
+            int timeIndex= cursor.getColumnIndex(DatabaseHelper.TIME);
+            int dataIndex = cursor.getColumnIndex(DatabaseHelper.DATE);
             do {
                 data.add(new CardsData(cursor.getInt(idIndex)
                         ,cursor.getString(nameIndex)
                         ,cursor.getString(descriptionIndex)
                         ,Integer.parseInt(cursor.getString(priorityIndex))
+                        ,cursor.getString(timeIndex)
+                        ,cursor.getString(dataIndex)
                 ));
             } while (cursor.moveToNext());
         } else

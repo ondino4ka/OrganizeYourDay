@@ -44,7 +44,12 @@ public class EditCardActivity extends AppCompatActivity {
 
         intent = getIntent();
         TextView titleText = (TextView) findViewById(R.id.textAbout);
-        titleText.setText(intent.getStringExtra("title"));
+        titleText.setText(intent.getStringExtra("title") + "\n"
+                + intent.getStringExtra("id")
+                +"\n" + intent.getStringExtra("description")
+                +"\n" + intent.getStringExtra("time")
+                +"\n" + intent.getStringExtra("data")
+        );
     }
 
     @Override

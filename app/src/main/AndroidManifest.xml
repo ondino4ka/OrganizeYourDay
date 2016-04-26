@@ -20,33 +20,29 @@
             </intent-filter>
         </activity>
         <activity
-        android:name=".AboutActivity"
-        android:label="@string/about_name"
-        android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+            android:name=".AboutActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
         <activity
             android:name=".EditCardActivity"
-            android:label="EditCard"/>
+            android:label="EditCard" />
         <activity
             android:name=".SettingsActivity"
-            android:label="Settings"/>
+            android:label="Settings" />
         <activity
             android:name=".Account"
-            android:label="Account"/>
+            android:label="Account" />
         <activity
             android:name=".TimeNotification"
-            android:label="TimeNotifications"/>
+            android:label="TimeNotifications" />
         <activity
             android:name=".DataBase.DataBaseTest"
-            android:label="DataBase"/>
-
-
-
+            android:label="DataBase" />
 
         <receiver android:name=".Notification.Notifications" />
 
-        <activity android:name=".AddNewCardActivity"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+        <activity
+            android:name=".AddNewCardActivity"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
