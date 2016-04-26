@@ -32,11 +32,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     Context localContext;
 
 
-
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         localContext = context;
-
     }
 
     @Override
@@ -53,11 +51,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    //  public void onCreate(SQLiteDatabase db) {
-    //      db.execSQL("create table " + TABLE_CONTACTS + "(" + ID_COLUMN
-    //             + " integer primary key," + REMINDERS_NAME_COLUMN + " text," + DESCRIPTION_COLUMN + " text" + ")");
-//
-    //  }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists " + TABLE_CONTACTS);
@@ -71,7 +64,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase database = this.getWritableDatabase();
 
-        //ContentValues contentValues = new ContentValues();
         Cursor cursor = database.query(DatabaseHelper.TABLE_CONTACTS, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex(DatabaseHelper.ID_COLUMN);

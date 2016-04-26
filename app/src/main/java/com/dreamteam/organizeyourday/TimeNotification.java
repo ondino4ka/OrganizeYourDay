@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.dreamteam.organizeyourday.DataBase.DataBaseTest;
 import com.dreamteam.organizeyourday.Notification.Notifications;
 
 
@@ -50,10 +49,5 @@ public class TimeNotification extends AppCompatActivity {
     }
 
 //для базы данных
-    public void openlayout(View view) {
-        Intent intent;
-        intent = new Intent(TimeNotification.this, DataBaseTest.class);
-        startActivity(intent);
 
-    }
 }
