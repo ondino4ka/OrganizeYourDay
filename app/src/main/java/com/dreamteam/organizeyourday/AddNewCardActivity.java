@@ -129,12 +129,16 @@ private boolean isEnterAnimationComplete = false;
             intent.putExtra("id", db.getLastId());
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),
                     db.getLastId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            String[] array = data.getText().toString().split("\\.");
+            Calendar calendar = Calendar.getInstance();
 
-            Calendar calendar1 = Calendar.getInstance();
-            calendar1.set(Calendar.HOUR_OF_DAY, time.getCurrentHour());
-            calendar1.set(Calendar.MINUTE, time.getCurrentMinute());
-           // am.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pendingIntent);
-            am.set(AlarmManager.RTC, calendar1.getTimeInMillis(), pendingIntent);
+            calendar.set(Calendar.YEAR, Integer.parseInt(array[2]));
+            calendar.set(Calendar.MONTH ,Integer.parseInt(array[1]) );
+            calendar.set(Calendar.DAY_OF_MONTH,Integer.parseInt(array[0]));
+            calendar.set(Calendar.HOUR_OF_DAY, time.getCurrentHour());
+            calendar.set(Calendar.MINUTE, time.getCurrentMinute());
+            calendar.set(Calendar.SECOND, 0);
+            am.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);

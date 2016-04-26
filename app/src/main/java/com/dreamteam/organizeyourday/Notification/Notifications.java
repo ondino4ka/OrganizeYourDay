@@ -28,7 +28,7 @@ public class Notifications extends BroadcastReceiver {
         String title = intent.getStringExtra("title");
         String description= intent.getStringExtra("description");
         int notif_id = intent.getIntExtra("id", 0);
-        int myColor=context.getResources().getColor(R.color.AccentBlue);
+        int myColor=context.getResources().getColor(R.color.AccentPink);
 
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, notif_id, intent1, PendingIntent.FLAG_CANCEL_CURRENT);
