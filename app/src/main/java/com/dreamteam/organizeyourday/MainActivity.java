@@ -22,6 +22,8 @@ import android.view.MenuItem;
 import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
 import com.dreamteam.organizeyourday.Fragments.FragmentHome;
 import com.dreamteam.organizeyourday.Fragments.FragmentShare;
+import com.dreamteam.organizeyourday.Fragments.FragmentTodayCards;
+import com.dreamteam.organizeyourday.adapter.TodayCardListAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity
 
     FragmentHome home;
     FragmentShare share;
+    FragmentTodayCards todayCards;
     FloatingActionButton fab;
 
     TabLayout tabLayout;
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity
 
         home = new FragmentHome();
         share = new FragmentShare();
+        todayCards = new FragmentTodayCards();
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -94,7 +98,7 @@ public class MainActivity extends AppCompatActivity
                 case 0:
                     return home;
                 case 1:
-                    return share;
+                    return todayCards;
                 default:
                     return home;
             }

@@ -8,11 +8,32 @@ public class CardsData {
     private final int ID;
     private int priority;
 
-    public  CardsData(int ID,String title, String description, int priority){
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    private String time;
+    private String date;
+
+    public  CardsData(int ID,String title, String description, int priority, String time, String date){
         this.title = title;
         this.ID = ID;
         this.description = description;
         this.priority = priority;
+        this.time = time;
+        this.date = date;
     }
 
     public String getTitle() {

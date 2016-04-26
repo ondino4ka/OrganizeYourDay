@@ -9,42 +9,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.dreamteam.organizeyourday.ContextContainer;
 import com.dreamteam.organizeyourday.EditCardActivity;
-import com.dreamteam.organizeyourday.MainActivity;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
 
 import java.util.List;
 
-public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardViewHolder>  {
+
+public class TodayCardListAdapter extends RecyclerView.Adapter<TodayCardListAdapter.TodayCardViewHolder>{
+
+    private static List<CardsData> todayCardsData;
 
 
-    private static List<CardsData> data;
-
-    public CardListAdapter(List<CardsData> data) {
-        this.data = data;
+    public TodayCardListAdapter(List<CardsData> data) {
+        this.todayCardsData = data;
     }
 
     @Override
-    public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TodayCardListAdapter.TodayCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item,parent,false);
-        return new CardViewHolder(view);
+        return new TodayCardViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final CardViewHolder holder, final int position) {
-        holder.title.setText(data.get(position).getTitle());
-        holder.description.setText(data.get(position).getDescription());
+    public void onBindViewHolder(final TodayCardViewHolder holder, int position) {
+        holder.title.setText(todayCardsData.get(position).getTitle());
+        holder.description.setText(todayCardsData.get(position).getDescription());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), EditCardActivity.class);
-                intent.putExtra("id","" + data.get(holder.getAdapterPosition()).getID());
+                intent.putExtra("id","" + todayCardsData.get(holder.getAdapterPosition()).getID());
                 intent.putExtra("title", holder.title.getText().toString());
-                intent.putExtra("description", holder.description.getText().toString());
-                intent.putExtra("time",data.get(position).getTime());
-                intent.putExtra("data", data.get(position).getDate());
 
                 Activity activity = (Activity) v.getContext();
                 activity.startActivityForResult(intent, Activity.RESULT_OK);
@@ -55,30 +51,22 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return todayCardsData.size();
     }
 
-    public void setData(List<CardsData> data){
-        this.data = data;
-    }
-
-    public static List<CardsData> getData() {
-        return data;
-    }
-
-    public static class CardViewHolder extends RecyclerView.ViewHolder{
+    public static class TodayCardViewHolder extends RecyclerView.ViewHolder{
 
         CardView card;
         TextView title;
         TextView description;
-        TextView text;
-        TextView data;
-        public CardViewHolder(final View itemView) {
+        public TodayCardViewHolder(final View itemView) {
             super(itemView);
+
+
+
             card = (CardView)itemView.findViewById(R.id.card);
             title = (TextView)itemView.findViewById(R.id.title);
             description = (TextView)itemView.findViewById(R.id.cardDescription);
         }
     }
-
 }
