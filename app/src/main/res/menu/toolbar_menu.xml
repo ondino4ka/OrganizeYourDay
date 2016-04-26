@@ -10,18 +10,28 @@
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView" />
     <item
-        android:id="@+id/action_sort0"
-        android:title="Sort0"
+        android:id="@+id/low_priority"
+        android:title="low"
         android:orderInCategory="100"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/action_sort1"
-        android:title="Sort1"
+        android:id="@+id/medium_priority"
+        android:title="medium"
         android:orderInCategory="100"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/action_sort2"
-        android:title="Sort2"
+        android:id="@+id/hard_priority"
+        android:title="hard"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
+    android:id="@+id/nightmare_priority"
+    android:title="nightmare"
+    android:orderInCategory="100"
+    app:showAsAction="never"/>
+    <item
+        android:id="@+id/all_cards"
+        android:title="all cards"
         android:orderInCategory="100"
         app:showAsAction="never"/>
 

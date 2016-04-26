@@ -105,11 +105,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         database.close();
         }
 
-    public List<CardsData> searchCards(){
+    public List<CardsData> getCardsWithSamePriority(int priority){
         List<CardsData> data = new ArrayList<>();
         SQLiteDatabase database = this.getWritableDatabase();
         String[] selectionArgs = null;
-        selectionArgs = new String[] { "4" };
+        selectionArgs = new String[] { String.valueOf(priority) };
         Cursor cursor = database.query(DatabaseHelper.TABLE_CONTACTS, null, "priority = ?", selectionArgs, null, null, null);
 
         if (cursor.moveToFirst()) {
