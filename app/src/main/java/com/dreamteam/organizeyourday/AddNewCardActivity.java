@@ -49,9 +49,9 @@ private boolean isEnterAnimationComplete = false;
         ThemeManager.setCurrentTheme(this);
         super.onCreate(savedInstanceState);
 
-        am = (AlarmManager) getSystemService(ALARM_SERVICE);
-
         setContentView(R.layout.activity_add_new_card);
+
+        am = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         time = (TimePicker)findViewById(R.id.time);
         data = (TextView)findViewById(R.id.data);
@@ -81,8 +81,8 @@ private boolean isEnterAnimationComplete = false;
     {
         Intent intent = new Intent(ContextContainer.getContext(), Notifications.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(ContextContainer.getContext(),
-            id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        am.cancel(pendingIntent);
+                id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        MainActivity.am.cancel(pendingIntent);
     }
 
     @Override
@@ -108,7 +108,7 @@ private boolean isEnterAnimationComplete = false;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.addCardButton){
+        if (item.getItemId() == R.id.addCardButton) {
             if (titleText.getText().toString().equals("")) {
                 notifyMe();
                 return false;
@@ -119,7 +119,7 @@ private boolean isEnterAnimationComplete = false;
                     titleText.getText().toString()
                     , descriptionText.getText().toString()
                     , prioritySpinner.getSelectedItemPosition()
-                    , time.getCurrentHour() +":" + time.getCurrentMinute()
+                    , time.getCurrentHour() + ":" + time.getCurrentMinute()
                     , data.getText().toString()
             );
 
@@ -135,5 +135,4 @@ private boolean isEnterAnimationComplete = false;
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

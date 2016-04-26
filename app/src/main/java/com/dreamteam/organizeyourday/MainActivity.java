@@ -1,5 +1,6 @@
 package com.dreamteam.organizeyourday;
 
+import android.app.AlarmManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     FragmentShare share;
     FragmentTodayCards todayCards;
     FloatingActionButton fab;
+    static AlarmManager am;
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        am = (AlarmManager) getSystemService(ALARM_SERVICE);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
