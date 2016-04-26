@@ -50,6 +50,9 @@ private boolean isEnterAnimationComplete = false;
         am = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         setContentView(R.layout.activity_add_new_card);
+        TimePicker timePicker = (TimePicker)findViewById(R.id.time);
+        timePicker.setIs24HourView(true);
+
         final TextInputEditText titleText = (TextInputEditText) findViewById(R.id.inputTitleText);
         final TextInputEditText descriptionText = (TextInputEditText) findViewById(R.id.inputTextDescription);
         final Spinner prioritySpinner = (Spinner)findViewById(R.id.prioritySpinner);

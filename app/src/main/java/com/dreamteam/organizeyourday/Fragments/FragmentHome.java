@@ -120,7 +120,7 @@ public class FragmentHome extends android.support.v4.app.Fragment {
     public void onResume() {
         super.onResume();
         cdAdapter.setData(db.getListOfDataBaseComponent());
-        cdAdapter.notifyItemChanged(CardListAdapter.getData().size());
+        cdAdapter.notifyDataSetChanged();
     }
 
     public void refreshAdapter(List<CardsData> data) {

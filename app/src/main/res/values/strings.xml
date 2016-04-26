@@ -40,9 +40,8 @@
 
     <string-array name="Priority">
         <item>low</item>
-        <item>not low</item>
         <item>medium</item>
-        <item>ultra</item>
+        <item>hard</item>
         <item>nightmare</item>
     </string-array>
 </resources>

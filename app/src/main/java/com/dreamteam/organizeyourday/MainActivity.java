@@ -1,6 +1,5 @@
 package com.dreamteam.organizeyourday;
 
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,8 +29,8 @@ public class MainActivity extends AppCompatActivity
     private static boolean isFirstStart = true;
     public static boolean isCurrentThemeChanged;
 
-    FragmentShare share;
     FragmentHome home;
+    FragmentShare share;
     FloatingActionButton fab;
 
     TabLayout tabLayout;
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity
 
         home = new FragmentHome();
         share = new FragmentShare();
+
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new SectionPagerAdapter(getSupportFragmentManager()));
@@ -94,8 +94,9 @@ public class MainActivity extends AppCompatActivity
                 case 0:
                     return home;
                 case 1:
-                default:
                     return share;
+                default:
+                    return home;
             }
         }
 
@@ -142,6 +143,23 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
+        switch (id){
+            case R.id.low_priority:
+                home.refreshAdapter(db.getCardsWithSamePriority(0));
+                break;
+            case R.id.medium_priority:
+                home.refreshAdapter(db.getCardsWithSamePriority(1));
+                break;
+            case R.id.hard_priority:
+                home.refreshAdapter(db.getCardsWithSamePriority(2));
+                break;
+            case R.id.nightmare_priority:
+                home.refreshAdapter(db.getCardsWithSamePriority(3));
+                break;
+            case R.id.all_cards:
+                home.refreshAdapter(db.getListOfDataBaseComponent());
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -161,7 +179,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.sorting:
                 DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
-                home.refreshAdapter(db.searchCards());
                 break;
             case R.id.about:
                 intent = new Intent(MainActivity.this, AboutActivity.class);
@@ -190,8 +207,11 @@ ftrans.commit();
     @Override
         public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+
         return true;
     }
+
+
 
 
     public void jumpToAccount(View view) {
