@@ -129,8 +129,12 @@ private boolean isEnterAnimationComplete = false;
             intent.putExtra("id", db.getLastId());
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),
                     db.getLastId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            am.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pendingIntent);
 
+            Calendar calendar1 = Calendar.getInstance();
+            calendar1.set(Calendar.HOUR_OF_DAY, time.getCurrentHour());
+            calendar1.set(Calendar.MINUTE, time.getCurrentMinute());
+           // am.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pendingIntent);
+            am.set(AlarmManager.RTC, calendar1.getTimeInMillis(), pendingIntent);
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);
