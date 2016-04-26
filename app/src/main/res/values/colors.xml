@@ -13,5 +13,5 @@
     <color name="AccentPink">#D81B60</color>
     <color name="foreground_material_light">#ffffff</color>
     <color name="black">#000000</color>
-
+    <color name="red">#d50000</color>
 </resources>
