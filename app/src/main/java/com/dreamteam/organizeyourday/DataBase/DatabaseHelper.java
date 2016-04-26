@@ -27,6 +27,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String REMINDERS_NAME_COLUMN = "reminders_headline";
     public static final String DESCRIPTION_COLUMN = "description_reminders";
     public static final String PRIORITY_COLUMN = "priority";
+    public static final String DATE = "date";
+    public static final String TIME = "time";
     Context localContext;
 
 
@@ -44,6 +46,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ID_COLUMN + " integer primary key, " +
                 REMINDERS_NAME_COLUMN + " text, " +
                 DESCRIPTION_COLUMN + " text, " +
+                DATE + " text, " +
+                TIME + " text, " +
                 PRIORITY_COLUMN + " text); ";
 
         db.execSQL(query);
