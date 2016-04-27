@@ -59,20 +59,19 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
     private void setCardFlagPriorityIcon(final CardViewHolder holder, int position)
     {
-        final ImageView flag = holder.flagImage;
         switch (data.get(position).getPriority())
         {
             case 0:
-                flag.setImageBitmap(BitmapFactory.decodeResource(ContextContainer.getContext().getResources(),R.drawable.flag_green));
+                holder.flagImage.setImageResource(R.drawable.flag_green);
                 break;
             case 1:
-                flag.setImageBitmap(BitmapFactory.decodeResource(ContextContainer.getContext().getResources(),R.drawable.flag_yellow));
+                holder.flagImage.setImageResource(R.drawable.flag_yellow);
                 break;
             case 2:
-                flag.setImageBitmap(BitmapFactory.decodeResource(ContextContainer.getContext().getResources(),R.drawable.flag_red));
+                holder.flagImage.setImageResource(R.drawable.flag_red);
                 break;
             default:
-                flag.setImageBitmap(BitmapFactory.decodeResource(ContextContainer.getContext().getResources(),R.drawable.flag_green));
+                holder.flagImage.setImageResource(R.drawable.flag_green);
                 break;
         }
     }
