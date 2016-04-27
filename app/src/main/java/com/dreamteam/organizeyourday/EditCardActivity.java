@@ -1,20 +1,19 @@
 package com.dreamteam.organizeyourday;
 
-import android.app.PendingIntent;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
-import com.dreamteam.organizeyourday.Notification.Notifications;
 
 public class EditCardActivity extends AppCompatActivity {
 
     Intent intent;
+    private FloatingActionButton fab;
     private boolean isEnterAnimationComplete = false;
     @Override
     protected void onPause(){
@@ -37,36 +36,31 @@ public class EditCardActivity extends AppCompatActivity {
 
         ThemeManager.setCurrentNoActionBarTheme(this);
         super.onCreate(savedInstanceState);
-      //  setContentView(R.layout.activity_edit_card);
-        setContentView(R.layout.activity_edit_card_test);
+        setContentView(R.layout.activity_edit_card);
         Toolbar toolbar = (Toolbar) findViewById(R.id.edit_toolbar);
         setSupportActionBar(toolbar);
+
+        fab = (FloatingActionButton) findViewById(R.id.delete_fab_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
+                db.removeCardInformation(Integer.parseInt(getIntent().getStringExtra("id")));
+                onBackPressed();
+            }
+        });
 
         intent = getIntent();
         TextView titleText = (TextView) findViewById(R.id.textAbout);
         titleText.setText(intent.getStringExtra("title") + "\n"
-                + intent.getStringExtra("id")
-                +"\n" + intent.getStringExtra("description")
-                +"\n" + intent.getStringExtra("time")
-                +"\n" + intent.getStringExtra("data")
+                        + intent.getStringExtra("id")
+                        + "\n" + intent.getStringExtra("description")
+                        + "\n" + intent.getStringExtra("time")
+                        + "\n" + intent.getStringExtra("data")
         );
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.editcard_toolbar_menu, menu);
-        return true;
-    }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.removeCardButton){
-            DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
-            db.removeCardInformation(Integer.parseInt(getIntent().getStringExtra("id")));
-            onBackPressed();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

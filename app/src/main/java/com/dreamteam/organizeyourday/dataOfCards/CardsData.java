@@ -1,10 +1,14 @@
 package com.dreamteam.organizeyourday.dataOfCards;
 
+import android.widget.ImageView;
+
 public class CardsData {
 
     private String title ;
     private String description;
-
+    private String time;
+    private String date;
+    private ImageView flag;
     private final int ID;
     private int priority;
 
@@ -24,8 +28,10 @@ public class CardsData {
         this.date = date;
     }
 
-    private String time;
-    private String date;
+    public  ImageView getFlag() {
+        return flag;
+    }
+
 
     public  CardsData(int ID,String title, String description, int priority, String time, String date){
         this.title = title;

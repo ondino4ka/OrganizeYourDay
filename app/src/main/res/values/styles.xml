@@ -45,4 +45,10 @@
 
     <style name="Blue.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Blue.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="FabDeleteStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimaryDark">@color/red</item>
+        <item name="colorAccent">@color/red</item>
+    </style>
 </resources>

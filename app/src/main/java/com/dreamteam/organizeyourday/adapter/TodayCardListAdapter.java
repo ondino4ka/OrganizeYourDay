@@ -33,8 +33,8 @@ public class TodayCardListAdapter extends RecyclerView.Adapter<TodayCardListAdap
 
     @Override
     public void onBindViewHolder(final TodayCardViewHolder holder, int position) {
-        holder.title.setText(todayCardsData.get(position).getTitle());
-        holder.description.setText(todayCardsData.get(position).getDescription());
+      //  holder.title.setText(todayCardsData.get(position).getTitle());
+       // holder.description.setText(todayCardsData.get(position).getDescription());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +63,7 @@ public class TodayCardListAdapter extends RecyclerView.Adapter<TodayCardListAdap
             super(itemView);
             card = (CardView)itemView.findViewById(R.id.card);
             title = (TextView)itemView.findViewById(R.id.title);
-            description = (TextView)itemView.findViewById(R.id.cardDescription);
+            description = (TextView)itemView.findViewById(R.id.card_description);
         }
     }
 }

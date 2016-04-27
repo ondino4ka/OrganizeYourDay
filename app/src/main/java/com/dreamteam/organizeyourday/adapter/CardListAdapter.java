@@ -2,16 +2,17 @@ package com.dreamteam.organizeyourday.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dreamteam.organizeyourday.ContextContainer;
 import com.dreamteam.organizeyourday.EditCardActivity;
-import com.dreamteam.organizeyourday.MainActivity;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
 
@@ -37,6 +38,9 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
         holder.title.setText(data.get(position).getTitle());
         holder.description.setText(data.get(position).getDescription());
+        holder.time.setText(data.get(position).getTime());
+        holder.date.setText(data.get(position).getDate());
+        setCardFlagPriorityIcon(holder, position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +57,26 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
             }
         });
     }
+
+    private void setCardFlagPriorityIcon(final CardViewHolder holder, int position)
+    {
+        switch (data.get(position).getPriority())
+        {
+            case 0:
+                holder.flagImage.setImageResource(R.drawable.flag_green);
+                break;
+            case 1:
+                holder.flagImage.setImageResource(R.drawable.flag_yellow);
+                break;
+            case 2:
+                holder.flagImage.setImageResource(R.drawable.flag_red);
+                break;
+            default:
+                holder.flagImage.setImageResource(R.drawable.flag_green);
+                break;
+        }
+    }
+
 
     @Override
     public int getItemCount() {
@@ -72,13 +96,17 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         CardView card;
         TextView title;
         TextView description;
-        TextView text;
-        TextView data;
+        TextView time;
+        TextView date;
+        ImageView flagImage;
         public CardViewHolder(final View itemView) {
             super(itemView);
             card = (CardView)itemView.findViewById(R.id.card);
-            title = (TextView)itemView.findViewById(R.id.title);
-            description = (TextView)itemView.findViewById(R.id.cardDescription);
+            title = (TextView)itemView.findViewById(R.id.card_title);
+            description = (TextView)itemView.findViewById(R.id.card_description);
+            date = (TextView)itemView.findViewById(R.id.card_date);
+            time= (TextView)itemView.findViewById(R.id.card_time);
+            flagImage = (ImageView)itemView.findViewById(R.id.priority_flag);
         }
     }
 
