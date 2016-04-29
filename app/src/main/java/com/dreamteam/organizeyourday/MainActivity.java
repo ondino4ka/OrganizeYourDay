@@ -29,6 +29,7 @@ import com.dreamteam.organizeyourday.adapter.TodayCardListAdapter;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
     private static boolean isFirstStart = true;
     public static boolean isCurrentThemeChanged;
 
@@ -46,8 +47,6 @@ public class MainActivity extends AppCompatActivity
         ThemeManager.setCurrentNoActionBarTheme(this);
 
         super.onCreate(savedInstanceState);
-
-
 
         setContentView(R.layout.activity_main);
 
@@ -73,10 +72,6 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(MainActivity.this, AddNewCardActivity.class);
                 startActivityForResult(intent, RESULT_OK);
                 overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
-
-                //DatabaseHelper db = new DatabaseHelper(ContextContainer.getContainer());
-                //db.addCard("test title" + counter++);
-                // home.refreshAdapter();
             }
         });
 
@@ -99,11 +94,11 @@ public class MainActivity extends AppCompatActivity
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return home;
-                case 1:
                     return todayCards;
-                default:
+                case 1:
                     return home;
+                default:
+                    return todayCards;
             }
         }
 
@@ -116,8 +111,9 @@ public class MainActivity extends AppCompatActivity
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "All";
+                    return "Today";
                 case 1:
+                    return "All";
                 default:
                     return "Today";
             }
@@ -154,18 +150,23 @@ public class MainActivity extends AppCompatActivity
         switch (id){
             case R.id.low_priority:
                 home.refreshAdapter(db.getCardsWithSamePriority(0));
+                todayCards.refreshAdapter(db.getDataOfTodayCardsWithSamePriority(0));
                 break;
             case R.id.medium_priority:
                 home.refreshAdapter(db.getCardsWithSamePriority(1));
+                todayCards.refreshAdapter(db.getDataOfTodayCardsWithSamePriority(1));
                 break;
             case R.id.hard_priority:
                 home.refreshAdapter(db.getCardsWithSamePriority(2));
+                todayCards.refreshAdapter(db.getDataOfTodayCardsWithSamePriority(2));
                 break;
             case R.id.nightmare_priority:
                 home.refreshAdapter(db.getCardsWithSamePriority(3));
+                todayCards.refreshAdapter(db.getDataOfTodayCardsWithSamePriority(3));
                 break;
             case R.id.all_cards:
                 home.refreshAdapter(db.getListOfDataBaseComponent());
+                todayCards.refreshAdapter(db.getListWithTodayDataOfCards());
         }
         return super.onOptionsItemSelected(item);
     }

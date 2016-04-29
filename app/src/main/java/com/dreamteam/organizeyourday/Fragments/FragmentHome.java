@@ -16,6 +16,7 @@ import com.dreamteam.organizeyourday.ContextContainer;
 import com.dreamteam.organizeyourday.DataBase.DatabaseHelper;
 import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.adapter.CardListAdapter;
+import com.dreamteam.organizeyourday.adapter.TodayCardListAdapter;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 
@@ -34,7 +35,7 @@ public class FragmentHome extends android.support.v4.app.Fragment {
     int counter = 0;
     private View view;
     DatabaseHelper db;
-    private CardListAdapter cdAdapter;
+    private TodayCardListAdapter  todayCdAdapter;
 
 
     public static FragmentHome getInstance(String param1, String param2) {
@@ -111,20 +112,20 @@ public class FragmentHome extends android.support.v4.app.Fragment {
         rv.setLayoutManager(new LinearLayoutManager(context));
         context = ContextContainer.getContext();
         db = new DatabaseHelper(context);
-        cdAdapter = new CardListAdapter(db.getListOfDataBaseComponent());
-        rv.setAdapter(cdAdapter);
+        todayCdAdapter = new TodayCardListAdapter(db.getListOfDataBaseComponent());
+        rv.setAdapter( todayCdAdapter);
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        cdAdapter.setData(db.getListOfDataBaseComponent());
-        cdAdapter.notifyDataSetChanged();
+        todayCdAdapter.setData(db.getListOfDataBaseComponent());
+        todayCdAdapter.notifyDataSetChanged();
     }
 
     public void refreshAdapter(List<CardsData> data) {
-        cdAdapter.setData(data);
-        cdAdapter.notifyDataSetChanged();
+        todayCdAdapter.setData(data);
+        todayCdAdapter.notifyDataSetChanged();
     }
 }

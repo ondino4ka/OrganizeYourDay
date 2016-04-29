@@ -31,7 +31,8 @@ public class FragmentTodayCards extends android.support.v4.app.Fragment {
     private String mParam2;
     Context context;
     private View view;
-    private TodayCardListAdapter todayCdAdapter;
+    //private TodayCardListAdapter todayCdAdapter;
+    private CardListAdapter cdAdapter;
 
     public FragmentTodayCards() {
         // Required empty public constructor
@@ -65,8 +66,9 @@ public class FragmentTodayCards extends android.support.v4.app.Fragment {
         final RecyclerView rv = (RecyclerView) view.findViewById(R.id.cardList);
         rv.setLayoutManager(new LinearLayoutManager(context));
         context = ContextContainer.getContext();
-        todayCdAdapter = new TodayCardListAdapter(mokeData());
-        rv.setAdapter(todayCdAdapter);
+        DatabaseHelper db = new DatabaseHelper((ContextContainer.getContext()));
+        cdAdapter = new CardListAdapter(db.getListWithTodayDataOfCards());
+        rv.setAdapter(cdAdapter);
         return view;
     }
 
@@ -76,5 +78,19 @@ public class FragmentTodayCards extends android.support.v4.app.Fragment {
         cards.add(new CardsData(500,"test 1", "test description", 1, "1213", "12342"));
         cards.add(new CardsData(500,"test 2", "test description", 0, "1213", "12342"));
         return cards;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        DatabaseHelper db = new DatabaseHelper((ContextContainer.getContext()));
+        cdAdapter.setData(db.getListWithTodayDataOfCards());
+        cdAdapter.notifyDataSetChanged();
+
+    }
+
+    public void refreshAdapter(List<CardsData> data) {
+        cdAdapter.setData(data);
+        cdAdapter.notifyDataSetChanged();
     }
 }

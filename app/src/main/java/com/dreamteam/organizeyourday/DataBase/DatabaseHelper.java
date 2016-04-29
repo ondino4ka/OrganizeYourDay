@@ -13,6 +13,7 @@ import com.dreamteam.organizeyourday.R;
 import com.dreamteam.organizeyourday.dataOfCards.CardsData;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -88,6 +89,83 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public List<CardsData> getListWithTodayDataOfCards() {
+        List<CardsData> data = new ArrayList<>();
+
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        String todayData = day + "." + month +"." + year;
+
+        Cursor cursor = database.query(DatabaseHelper.TABLE_CONTACTS, null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(DatabaseHelper.ID_COLUMN);
+            int nameIndex = cursor.getColumnIndex(DatabaseHelper.REMINDERS_NAME_COLUMN);
+            int descriptionIndex = cursor.getColumnIndex(DatabaseHelper.DESCRIPTION_COLUMN);
+            int priorityIndex = cursor.getColumnIndex(DatabaseHelper.PRIORITY_COLUMN);
+            int timeIndex= cursor.getColumnIndex(DatabaseHelper.TIME);
+            int dataIndex = cursor.getColumnIndex(DatabaseHelper.DATE);
+            do {
+                if (cursor.getString(dataIndex).equals(todayData)) {
+                    data.add(new CardsData(cursor.getInt(idIndex)
+                            ,cursor.getString(nameIndex)
+                            ,cursor.getString(descriptionIndex)
+                            ,Integer.parseInt(cursor.getString(priorityIndex))
+                            ,cursor.getString(timeIndex)
+                            ,cursor.getString(dataIndex)
+                    ));
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        this.close();
+        return data;
+    }
+
+    public List<CardsData> getDataOfTodayCardsWithSamePriority(int priority){
+        List<CardsData> data = new ArrayList<>();
+        SQLiteDatabase database = this.getWritableDatabase();
+        String[] selectionArgs = null;
+        selectionArgs = new String[] { String.valueOf(priority)};
+        Cursor cursor = database.query(DatabaseHelper.TABLE_CONTACTS, null, "priority = ?", selectionArgs, null, null, null);
+
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        String todayData = day + "." + month +"." + year;
+
+        if (cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(DatabaseHelper.ID_COLUMN);
+            int nameIndex = cursor.getColumnIndex(DatabaseHelper.REMINDERS_NAME_COLUMN);
+            int descriptionIndex = cursor.getColumnIndex(DatabaseHelper.DESCRIPTION_COLUMN);
+            int priorityIndex = cursor.getColumnIndex(DatabaseHelper.PRIORITY_COLUMN);
+            int timeIndex= cursor.getColumnIndex(DatabaseHelper.TIME);
+            int dataIndex = cursor.getColumnIndex(DatabaseHelper.DATE);
+            do {
+                if (cursor.getString(dataIndex).equals(todayData)) {
+                    data.add(new CardsData(cursor.getInt(idIndex)
+                            , cursor.getString(nameIndex)
+                            , cursor.getString(descriptionIndex)
+                            , Integer.parseInt(cursor.getString(priorityIndex))
+                            , cursor.getString(timeIndex)
+                            , cursor.getString(dataIndex)
+                    ));
+                }
+            } while (cursor.moveToNext());
+        } else
+            Log.d("mLog","0 rows");
+        cursor.close();
+
+        return data;
+    }
+
 
     public int removeCardInformation(int ID){
         SQLiteDatabase database = this.getWritableDatabase();
@@ -111,7 +189,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<CardsData> data = new ArrayList<>();
         SQLiteDatabase database = this.getWritableDatabase();
         String[] selectionArgs = null;
-        selectionArgs = new String[] { String.valueOf(priority) };
+        selectionArgs = new String[] { String.valueOf(priority)};
         Cursor cursor = database.query(DatabaseHelper.TABLE_CONTACTS, null, "priority = ?", selectionArgs, null, null, null);
 
         if (cursor.moveToFirst()) {
