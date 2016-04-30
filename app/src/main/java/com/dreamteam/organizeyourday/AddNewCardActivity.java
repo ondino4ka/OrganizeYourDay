@@ -135,17 +135,20 @@ private boolean isEnterAnimationComplete = false;
             intent.putExtra("title", titleText.getText().toString());
             intent.putExtra("description", descriptionText.getText().toString());
             intent.putExtra("id", db.getLastId());
+            intent.putExtra("priority", prioritySpinner.getSelectedItemPosition());
+
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),
                     db.getLastId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
             String[] array = data.getText().toString().split("\\.");
             Calendar calendar = Calendar.getInstance();
-
             calendar.set(Calendar.YEAR, Integer.parseInt(array[2]));
             calendar.set(Calendar.MONTH ,Integer.parseInt(array[1]) );
             calendar.set(Calendar.DAY_OF_MONTH,Integer.parseInt(array[0]));
             calendar.set(Calendar.HOUR_OF_DAY, time.getCurrentHour());
             calendar.set(Calendar.MINUTE, time.getCurrentMinute());
             calendar.set(Calendar.SECOND, 0);
+
             am.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
             onBackPressed();
         }

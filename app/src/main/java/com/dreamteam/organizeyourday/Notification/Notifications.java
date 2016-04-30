@@ -28,13 +28,33 @@ public class Notifications extends BroadcastReceiver {
         String title = intent.getStringExtra("title");
         String description= intent.getStringExtra("description");
         int notif_id = intent.getIntExtra("id", 0);
-        int myColor=context.getResources().getColor(R.color.AccentPink);
+        int priority = intent.getIntExtra("priority", 0);
+        int myColor=0;
 
+        switch (priority){
+            case 0: {
+                myColor=context.getResources().getColor(R.color.GreenNotification);
+                break;
+            }
+            case 1: {
+                myColor = context.getResources().getColor(R.color.YellowNotification);
+                break;
+            }
+            case 2:{
+                myColor = context.getResources().getColor(R.color.AccentPink);
+                break;
+            }
+
+            case 3:{
+                myColor = context.getResources().getColor(R.color.RedNotification);
+                break;
+            }
+        }
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, notif_id, intent1, PendingIntent.FLAG_CANCEL_CURRENT);
         builder
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.icon)
+                .setSmallIcon(R.drawable.ic_error_24dp)
                 .setColor(myColor)
                 .setTicker(title)
                 .setWhen(System.currentTimeMillis())

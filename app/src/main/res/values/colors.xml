@@ -8,6 +8,13 @@
     <color name="PrimaryDarkBlue">#1E88E5</color>
     <color name="AccentBlue">#1E88E5</color>
 
+
+    <color name="GreenNotification">#00C853</color>
+    <color name="YellowNotification">#FFEB3B</color>
+    <color name="RedNotification">#d50000</color>
+
+
+
     <color name="PrimaryPink">#E91E63</color>
     <color name="PrimaryDarkPink">#D81B60</color>
     <color name="AccentPink">#D81B60</color>
