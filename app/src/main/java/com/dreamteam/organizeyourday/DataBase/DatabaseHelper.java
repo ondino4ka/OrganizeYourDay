@@ -179,7 +179,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHelper.REMINDERS_NAME_COLUMN, title);
         contentValues.put(DatabaseHelper.DESCRIPTION_COLUMN,description);
-        database.update(DatabaseHelper.TABLE_CONTACTS,contentValues,ID_COLUMN+"="+ rowID,null);
+        database.update(DatabaseHelper.TABLE_CONTACTS, contentValues, ID_COLUMN + "=" + rowID, null);
     }
 
     public void addCard(String title, String description,int priority,String time, String data){
@@ -231,3 +231,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor.getInt(0);
     }
 }
+
+
+//
+//       database.delete(DatabaseHelper.TABLE_CONTACTS, null, null);
+ //

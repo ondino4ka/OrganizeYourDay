@@ -8,11 +8,7 @@
             android:icon="@drawable/ic_menu_home"
             android:title="Home" />
 
-        <item
 
-            android:id="@+id/sorting"
-            android:icon="@drawable/ic_menu_sorting"
-            android:title="@string/sorting_inem" />
     </group>
 
     <item android:title="@string/nav_bar_settings">
@@ -32,10 +28,7 @@
                 android:icon="@drawable/ic_info"
                 android:title="About"/>
 
-            <item
-                android:id="@+id/notifications"
-                android:icon="@drawable/ic_info"
-                android:title="Notifications"/>
+
 
         </menu>
     </item>

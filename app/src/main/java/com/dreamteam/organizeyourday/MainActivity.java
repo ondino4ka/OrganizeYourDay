@@ -185,9 +185,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_share:
 
                 break;
-            case R.id.sorting:
-                DatabaseHelper db = new DatabaseHelper(ContextContainer.getContext());
-                break;
+
             case R.id.about:
                 intent = new Intent(MainActivity.this, AboutActivity.class);
                 startActivityForResult(intent, RESULT_OK);
@@ -198,12 +196,7 @@ public class MainActivity extends AppCompatActivity
                 startActivityForResult(intent,RESULT_OK);
                 overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
                 break;
-            case R.id.notifications:
-                fab.hide();
-                intent = new Intent(MainActivity.this, TimeNotification.class);
-                startActivityForResult(intent, RESULT_OK);
-                overridePendingTransition(R.anim.down_anim_in, R.anim.down_anim_fade_out);
-                break;
+
         }
 ftrans.commit();
 
