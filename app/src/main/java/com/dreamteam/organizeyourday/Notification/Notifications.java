@@ -64,6 +64,26 @@ public class Notifications extends BroadcastReceiver {
         Notification notification = builder.build();
 
         notification.defaults = Notification.DEFAULT_ALL ;
+
+        switch (priority){
+            case 0: {
+
+                break;
+            }
+            case 1: {
+
+                break;
+            }
+            case 2:{
+                notification.flags=notification.flags | Notification.FLAG_ONGOING_EVENT;
+                break;
+            }
+
+            case 3:{
+               notification.flags=notification.flags | Notification.FLAG_INSISTENT | Notification.FLAG_ONGOING_EVENT;
+                break;
+            }
+        }
         nm.notify(notif_id, notification);
 
     }
